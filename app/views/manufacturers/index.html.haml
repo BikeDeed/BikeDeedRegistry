@@ -1,0 +1,46 @@
+- cache(['manufacturers_index', @manufacturers.maximum(:updated_at)]) do
+  %h1
+    Manufacturers we know about
+
+  %section.full-screen-table
+    %table#manufacturers-list.table.table-striped.table-bordered
+      %thead
+        %th
+          Name
+        %th.large-screens
+          Only makes components
+      %tbody
+        - @manufacturers.each do |manufacturer|
+          %tr
+            %td
+              - if manufacturer.website
+                %a{href: manufacturer.website}
+                  = manufacturer.name
+              - else
+                = manufacturer.name
+            %td.large-screens.table-cell-check
+              = "&#x2713;".html_safe unless manufacturer.frame_maker
+
+  %h2.padded
+    OH NO! We're missing a manufacturer?
+  %p
+    That's not actually surprising, there are a bunch.
+  %p
+    Give us a heads up in a comment below.
+
+= render '/shared/content_footer_ad'
+
+.padded
+%article#discourse-comments
+  :plain
+    <script type="text/javascript">
+      DiscourseEmbed = { discourseUrl: 'https://discuss.bikeindex.org/',
+                         discourseEmbedUrl: '#{manufacturers_url}' };
+
+      (function() {
+        var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
+        d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(d);
+      })();
+    </script>
+

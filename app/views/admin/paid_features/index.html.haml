@@ -1,0 +1,39 @@
+%header.with-subtitle
+  %h1 Paid Features
+  = link_to "New Feature", new_admin_paid_feature_url, class: "button-green sharing-links"
+
+%h4
+  #{@paid_features.count} total
+
+%section.full-screen-table
+  %table.table.table-striped.table-bordered.sortable
+    %thead
+      %th
+        = sortable "created_at", "Added"
+      %th
+        = sortable "name"
+      %th
+        = sortable "kind"
+      %th
+        = sortable "amount_cents", "Amount"
+    %tbody
+      - @paid_features.each do |paid_feature|
+        %tr
+          %td
+            %span.convertTime
+              = l paid_feature.created_at, format: :convert_time
+          %td
+            = link_to paid_feature.name, edit_admin_paid_feature_url(paid_feature)
+            %br
+            .large-screens
+              %small
+                = paid_feature.description
+                - if paid_feature.details_link.present?
+                  %br
+                  = paid_feature.details_link
+
+          %td
+            %small
+              = paid_feature.kind.humanize
+          %td
+            = paid_feature.amount_formatted

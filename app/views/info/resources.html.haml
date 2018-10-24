@@ -1,0 +1,31 @@
+%h1
+  Bike Index Resources
+
+%ul
+  %li
+    %p
+      <strong>Infographic</strong>:
+      %a{ href: how_not_to_buy_stolen_url }
+        How not to buy a stolen bike in 4 easy steps
+  %li
+    %p
+      Check out our #{link_to "map of bike thefts", "http://map.bikewise.org"}.
+  %li
+    %p
+      Get Bike Index #{link_to "logos and design assets", image_resources_url}.
+  %li
+    %p
+      Did you know every bike has a unique, identifying number? #{link_to "Learn about serial numbers here", serials_url}.
+  %li
+    %p
+      View the list of all
+      = link_to "the manufacturers", manufacturers_url
+      we know about.
+  %li
+    %p
+      We're open source, view this app (and other things) on #{link_to "GitHub", "https://github.com/bikeindex", target: "_blank"}.
+  %li
+    %p
+      We have an open API - check out our #{link_to "API documentation", documentation_index_url}.
+
+= render '/shared/content_footer_ad'

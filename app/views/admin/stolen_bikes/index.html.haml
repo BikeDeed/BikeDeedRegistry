@@ -1,0 +1,84 @@
+%header.with-subtitle
+  %h1
+    Stolen Bikes
+  - if @verified_only
+    = link_to 'All stolen (not just unverified)', admin_stolen_bikes_url(unapproved: true), class: "sharing-links"
+  - else
+    = link_to 'Only unverified bikes', admin_stolen_bikes_url, class: "sharing-links"
+%h4
+  = link_to "View stolen notifications sent", admin_stolen_notifications_url
+
+%h4
+  = Bike.where(stolen: true).count
+  Stolen Bikes indexed,
+  %em
+    (#{Bike.where(stolen: true).where("created_at >= ?", Time.zone.now.beginning_of_day).count} today)
+%h4
+  = StolenRecord.where(approved: false).count
+  are unapproved
+
+.paginate-container
+  = paginate @bikes
+%section.full-screen-table
+  %table.table.table-striped.table-bordered
+    %thead
+      %th
+        Stolen record created&nbsp;<small class="convertTimezone"></small>
+      %th.not-tiny-screens
+        Bike info
+      %th.large-screens
+        Theft info
+      %th
+        Location
+      %th
+        Approved
+
+
+    %tbody
+      - @bikes.each do |bike|
+        - current_stolen_record = bike.current_stolen_record
+        %tr
+          %td
+            .less-strong-hold
+              %span.less-strong-right.medium-screens
+                - if bike.example
+                  %span.table-error
+                    = bike.id
+                - else
+                  = bike.id
+              %small
+                %a{ href: edit_admin_stolen_bike_url(bike) }
+                  - created_date = current_stolen_record ? current_stolen_record.created_at : bike.created_at
+                  %span.convertTime
+                    = l created_date, format: :convert_time
+          %td.not-tiny-screens
+            = bike.title_string
+
+            - if current_stolen_record && current_stolen_record.estimated_value.present?
+              %br
+              %small.less-strong
+                $#{current_stolen_record.estimated_value}
+          
+          - if current_stolen_record.present?
+            %td.large-screens
+              = current_stolen_record.theft_description
+            %td
+              - if current_stolen_record.address.present?
+                = current_stolen_record.city
+            %td.table-cell-check
+              = "&#x2713;".html_safe if current_stolen_record.approved
+              - if bike.owner.donor?
+                <span class="donor-icon">D</span>
+              - elsif bike.owner.paid_org?
+                <span class="paid-org-icon">O</span>
+          - else
+            %td.large-screens
+            %td
+            %td
+              - if bike.owner.donor?
+                <span class="donor-icon">D</span>
+              - elsif bike.owner.paid_org?
+                <span class="paid-org-icon">O</span>
+
+  .paginate-container
+    = paginate @bikes

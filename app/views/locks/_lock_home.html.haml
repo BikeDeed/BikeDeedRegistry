@@ -1,0 +1,41 @@
+- if @locks.any?
+  %header.with-subtitle
+    %h3
+      Your locks
+    %p.sharing-links
+      = link_to "Add a new lock", new_lock_url
+
+- if @locks.any?
+  %ul.lock-boxes
+    - @locks.each do |lock|
+      %li
+        .blist-image-holder
+          %a{href: "/locks/#{lock.id}"}
+            = image_tag("locks/#{lock.lock_type.slug}.jpg")
+        .blist-primary-group
+          %dl.dl-horizontal
+            = lock.dl_list_item(link_to(lock.lock_type_name, lock_url(lock)), "Lock Type")
+            = lock.dl_list_item(lock.mnfg_name, "Manufacturer")
+            = lock.dl_from_attribute("key_serial")
+            = lock.dl_from_attribute("combination")
+
+- else
+  %h2
+    Save information about your bike lock!
+  %p
+    Lock keys often have serial numbers, so you can order replacements if you lose the keys.
+  %p
+    If you want, you can
+    %strong
+      save the serial numbers of your keys
+    on Bike Index&mdash;so you won't be out of luck if you lose them.
+  %p
+    You can also
+    %strong
+      record your lock combinations.
+  %p
+    %em
+      Any lock information you enter on Bike Index is private and visible only to you.
+
+  %p
+    = link_to "Save information about a lock", new_lock_url, class: "button-blue"
