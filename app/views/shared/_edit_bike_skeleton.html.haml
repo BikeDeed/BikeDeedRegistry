@@ -1,0 +1,21 @@
+.form-well-header.container{ data: { template: @edit_template } }
+  .edit-bike-header
+    %h1
+      - if @bike.stolen and @bike.find_current_stolen_record.present?
+        %span.text-danger
+          = @bike.recovered ? 'recovered' : 'stolen'
+      - else
+        Edit
+      = @bike.year
+      = @bike.mnfg_name
+      = @bike.frame_model
+      = @bike.type unless @bike.type == 'bike'
+    - unless @bike.current_owner_exists
+      %p.edit-bike-title-submenu
+        Sent to 
+        %em
+          = @bike.owner_email
+        but it hasn't been claimed yet
+    %p.edit-bike-title-submenu
+      = link_to "View #{@bike.type.titleize}", bike_path(@bike)
+= yield

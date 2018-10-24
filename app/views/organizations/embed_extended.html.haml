@@ -1,0 +1,116 @@
+#root_url.hidden{data: { url: ENV['BASE_URL'] }}
+= form_for @bike, multipart: true do |f|
+  = hidden_field_tag :persist_email, @persist_email
+  = f.hidden_field :b_param_id_token
+  = f.hidden_field :creation_organization_id
+  = f.hidden_field :embeded, value: true
+  = f.hidden_field :embeded_extended, value: true
+  .input-group
+    .control-group
+      = f.label :serial_number, class: "control-label"
+      .controls
+        = f.text_field :serial_number, :required =>true, autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off'
+      - if @organization.use_additional_registration_field
+        = f.label :additional_registration, "Additional registration number", class: "control-label"
+        .controls
+          = f.text_field :additional_registration, autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off' 
+    .has-no-serial.optional-block
+      %label
+        = f.check_box :has_no_serial, tabindex: -1 
+        Has no serial
+
+  .input-group.with-additional-block
+    .control-group.select-jsonified
+      = f.label :manufacturer_id, class: "control-label"
+      .controls
+        = f.text_field :manufacturer_id, value: @bike.manufacturer && @bike.manufacturer.name
+        %span.help-block
+          Select 'Other' if manufacturer isn't listed
+    .hidden-other.control-group.manufacturer-other-input
+      = f.label :manufacturer_other, "Other manufacturer", class: "control-label"
+      .controls
+        = f.text_field :manufacturer_other, placeholder: "Manufacturer name"
+
+  .input-group
+    .control-group.special-select-single
+      = f.label :year, "Model year", class: "control-label"
+      .controls
+        - years = (1900..Time.now.year+1).to_a.reverse.map {|i| [i,i] }
+        = f.select :year, years, selected: Time.now.year, prompt: "Unsure or unknown"
+    .unknown-year.optional-block
+      %label
+        %input#bike_unknown_year{ type: 'checkbox', tabindex: -1 }
+        Unknown year
+        
+  .input-group
+    .control-group
+      = f.label :frame_model, class: "control-label"
+      .controls
+        = f.text_field :frame_model, autocomplete: 'off'
+
+  .input-group.with-optional-blocks
+    .control-group.special-select-single
+      = f.label :primary_frame_color_id, "Frame color", class: "control-label"
+      .controls
+        = collection_select( :bike, :primary_frame_color_id, Color.all, :id, :name, required: true, prompt: "Choose color" )
+    %a#add-secondary.optional-form-block{data: {target: "#secondary-color", toggle: "#rm-secondary"}}
+      Add a color
+    %a#rm-secondary.optional-form-block.rm-block.currently-hidden{data: {target: "#secondary-color", toggle: "#add-secondary"}}
+      Remove color
+    #secondary-color.hidden-other
+      .control-group.special-select-single
+        %label.control-label
+          Secondary color
+        .controls
+          = collection_select( :bike, :secondary_frame_color_id, Color.all, :id, :name, prompt: "Choose color" )
+      %a#add-tertiary.optional-form-block{data: {target: "#tertiary-color", toggle: "#rm-tertiary"}}
+        Add a color
+      %a#rm-tertiary.optional-form-block.rm-block.currently-hidden{data: {target: "#tertiary-color", toggle: "#add-tertiary"}}
+        Remove color
+    #tertiary-color.hidden-other
+      .control-group
+        %label.control-label
+          Third color
+        .controls.special-select-single
+          = collection_select( :bike, :tertiary_frame_color_id, Color.all, :id, :name, prompt: "Choose color" )
+  .input-group
+    .control-group
+      %label.control-label{ for: 'bike_owner_email' }
+        Owner's email address
+        = f.email_field :owner_email
+  .input-group
+    .submit-registration
+      = submit_tag "Register this", class: "button-submit"
+      = collection_select( :bike, :cycle_type_id, CycleType.all, :id, :name, required: true)
+  .input-group
+    %h3
+      Optional additions
+    - if @organization.has_bike_codes
+      .control-group.special-select-single
+      = f.label :bike_code, "Sticker id", class: "control-label"
+      .controls
+        = f.text_field :bike_code, value: ""
+    .control-group.special-select-single
+      = f.label :frame_material_id, "Primary frame material", class: "control-label"
+      .controls
+        = collection_select( :bike, :frame_material_id, FrameMaterial.all, :id, :name, prompt: "Choose material" )
+  .input-group
+    .control-group.special-select-single
+      = f.label :handlebar_type_id, class: "control-label"
+      .controls
+        = collection_select( :bike, :handlebar_type_id, HandlebarType.all, :id, :name, label: "Handlebar Style", required: true, prompt: "Choose handlebar" )
+  .input-group
+    .control-group
+      = f.label :description, "Other defining features", class: "control-label"
+      .controls
+        = f.text_area :description, rows: 3, placeholder: "Any extra words?"
+  .input-group.form-foot
+    .control-group.form-photo-group
+      - if @b_param.image.present? or @b_param.image_tmp.present?
+        %strong
+          Image has been uploaded
+      - else
+        .filefield-button
+          Choose photo
+          = f.file_field :image
+        #filepath

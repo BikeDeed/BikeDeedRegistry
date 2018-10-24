@@ -1,0 +1,40 @@
+# Ignore bundler config
+/.bundle
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+.DS_Store
+coverage/*
+public/uploads/*
+public/caches
+.sass-cache
+public/partner
+.vagrant
+ubuntu-xenial-16.04-cloudimg-console.log
+*.rdb
+current_stolen_bikes.tsv
+spec/fixtures/tsv_creation/*.tsv
+spec/fixtures/tsv_creation/*.json
+
+# Ignore rvm stuff
+.rvmrc
+.ruby-gemset
+.ruby-version
+.powenv
+
+# Ignore Chef stuff
+Cheffile.lock
+cookbooks/*
+
+# Ignore localeapp
+.localeapp
+log/localeapp.yml
+
+# Ignore import files
+sm_import_*.json
+spec/fixtures/bikes/*.json
+manufacturer.tsv
+
+# Ignore special configuration env file
+.env.*

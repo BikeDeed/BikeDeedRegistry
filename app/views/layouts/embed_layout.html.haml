@@ -1,0 +1,40 @@
+!!!
+%html
+  %head
+    %meta{charset: 'utf-8'}
+    %meta{'http-equiv' => 'X-UA-Compatible', content: 'IE=edge,chrome=1'}
+    %meta{name: 'viewport', content: 'width=device-width, initial-scale=1, maximum-scale=1'}
+    %meta{name: 'description', content: "Embedable form, add a bike through #{@organization.name}." }
+    %title
+      Register a bike through #{@organization.name}
+    = stylesheet_link_tag "embed_styles", media: "all"
+    = javascript_include_tag "embed"
+    = csrf_meta_tags
+    
+  %body#bi_embed
+    #alert-block
+      - flash.each do |name, msg|
+        %div{class: "alert-#{name}"}
+          %a.close{'data-dismiss' => 'alert'} ×
+          = content_tag :div, msg, id: "flash_#{name}" if msg.is_a?(String)
+
+      - if @b_param && @b_param.bike_errors.present?
+        #alert-block
+          .alert.alert-error
+            %a.close{"data-dismiss" => "alert"} ×
+            %h4
+              Please fix the following 
+              = pluralize(@b_param.bike_errors.count, "error")
+            %ul
+              - @b_param.bike_errors.each do |msg|
+                %li
+                  = msg
+          
+    = yield
+  :javascript
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-38316708-1', 'auto');
+    ga('send', 'pageview');

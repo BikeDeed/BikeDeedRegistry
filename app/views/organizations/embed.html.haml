@@ -1,0 +1,175 @@
+#stolen_fields_store
+#root_url.hidden{data: { url: ENV['BASE_URL'] }}
+= form_for @bike, multipart: true do |f|
+  = f.hidden_field :b_param_id_token
+  = f.hidden_field :creation_organization_id
+  = f.hidden_field :embeded, value: true
+  .input-group
+    - if @stolen
+      %span#stolen_registration_first
+    - unless @stolen || @non_stolen
+      #registration-type-tabs
+        %a.registration-type-tab{ href: '#', data: { stype: 'description' } }
+          Registering a stolen bike. Click here to register a non-stolen bike
+        %a.registration-type-tab.stolen.current-type{ href: '#', data: { stype: 'serial' } }
+          Currently registering a non-stolen bike. Click here to register a STOLEN bike instead.
+    .control-group
+      = f.label :serial_number, class: "control-label"
+      .controls
+        = f.text_field :serial_number, :required =>true, autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off'
+      - if @organization.use_additional_registration_field
+        = f.label :additional_registration, "Additional registration number", class: "control-label"
+        .controls
+          = f.text_field :additional_registration, autocomplete: 'off', autocorrect: 'off', autocapitalize: 'off'
+    .has-no-serial.optional-block
+      %label
+        = f.check_box :has_no_serial, tabindex: -1 
+        %span.stolen          
+          Unknown
+        %span.not-stolen          
+          Has no serial
+
+  .input-group.with-additional-block
+    .control-group.select-jsonified
+      = f.label :manufacturer_id, class: "control-label"
+      .controls
+        = f.text_field :manufacturer_id, value: @bike.manufacturer && @bike.manufacturer.name
+        %span.help-block
+          Select 'Other' if manufacturer isn't listed
+    .hidden-other.control-group.manufacturer-other-input
+      = f.label :manufacturer_other, "Other manufacturer", class: "control-label"
+      .controls
+        = f.text_field :manufacturer_other, placeholder: "Manufacturer name"
+
+  .input-group
+    .control-group.special-select-single
+      = f.label :year, "Model year", class: "control-label"
+      .controls
+        - years = (1900..Time.now.year+1).to_a.reverse.map {|i| [i,i] }
+        = f.select :year, years, selected: Time.now.year, prompt: "Unsure or unknown"
+    .unknown-year.optional-block
+      %label
+        %input#bike_unknown_year{ type: 'checkbox', tabindex: -1 }
+        Unknown year
+        
+  .input-group
+    .control-group
+      = f.label :frame_model, class: "control-label"
+      .controls
+        = f.text_field :frame_model, autocomplete: 'off'
+
+  .input-group.with-optional-blocks
+    .control-group.special-select-single
+      = f.label :primary_frame_color_id, "Frame color", class: "control-label"
+      .controls
+        = collection_select( :bike, :primary_frame_color_id, Color.all, :id, :name, required: true, prompt: "Choose color" )
+    %a#add-secondary.optional-form-block{data: {target: "#secondary-color", toggle: "#rm-secondary"}}
+      Add a color
+    %a#rm-secondary.optional-form-block.rm-block.currently-hidden{data: {target: "#secondary-color", toggle: "#add-secondary"}}
+      Remove color
+    #secondary-color.hidden-other
+      .control-group.special-select-single
+        %label.control-label
+          Secondary color
+        .controls
+          = collection_select( :bike, :secondary_frame_color_id, Color.all, :id, :name, prompt: "Choose color" )
+      %a#add-tertiary.optional-form-block{data: {target: "#tertiary-color", toggle: "#rm-tertiary"}}
+        Add a color
+      %a#rm-tertiary.optional-form-block.rm-block.currently-hidden{data: {target: "#tertiary-color", toggle: "#add-tertiary"}}
+        Remove color
+    #tertiary-color.hidden-other
+      .control-group
+        %label.control-label
+          Third color
+        .controls.special-select-single
+          = collection_select( :bike, :tertiary_frame_color_id, Color.all, :id, :name, prompt: "Choose color" )
+  
+  #stolen_fields_container
+    #stolen_fields
+      = f.hidden_field :stolen, value: true
+      = fields_for @stolen_record do |builder|
+        = builder.hidden_field :phone_no_show, value: true
+        .input-group#stolenDisplay
+          .control-group
+            = builder.label :phone, class: "control-label"
+            .controls
+              = builder.text_field :phone, required: "true"
+        .input-group
+          .control-group{ style: "width: 300px; max-width: 100%;" }
+            = builder.label :date_stolen, "When was it stolen?", class: "control-label"
+            - builder.object.date_stolen = TimeParser.round(builder.object.date_stolen || Time.now)
+            = builder.hidden_field :timezone, value: "", class: "hiddenFieldTimezone"
+            = builder.datetime_local_field :date_stolen, max: Time.now + 1.day, step: 3600, required: true, class: 'form-control', style: "font-size: 90%; width: 100%;"
+        #stolen-bike-location.input-group
+          .control-group.special-select-single
+            = builder.label :street, 'Where was it stolen?', class: 'control-label'
+            #country_select_container.controls.special-select-single
+              = builder.collection_select(:country_id, Country.all, :id, :name, prompt: 'Choose country')
+          .control-group.extra-group.special-select-single
+            .controls
+              = builder.text_field :street, placeholder: "Intersection or address"
+            .controls.extra-field
+              = builder.text_field :city, placeholder: "City"
+            .controls.extra-field
+              = builder.text_field :zipcode, placeholder: "Zipcode"
+            #state-select.controls.extra-field.special-select-single
+              = builder.collection_select(:state_id, State.all, :id, :name, include_blank: true, prompt: "State" )
+        .input-group
+          .control-group.large-text
+            = builder.label :theft_description, "Description of the theft", class: "control-label"
+            .controls
+              = builder.text_area :theft_description, rows: 3
+        .input-group
+          %p.stolen-suggestion
+            Filing a 
+            %strong
+              police report
+            is 
+            %span.stolen-color
+              extremely important
+            for stolen bike recovery.
+          .control-group
+            = builder.label :police_report_number, "Police report number", class: 'control-label'
+            .controls
+              = builder.text_field :police_report_number
+          .control-group.extra-group
+            = builder.label :police_report_department, "Department & city", class: 'control-label'
+            .controls
+              = builder.text_field :police_report_department
+        .input-group
+          .control-group.receive-group
+            .receive-notifications
+              = builder.label :receive_notifications do
+                = builder.check_box :receive_notifications, checked: true
+                Receive notifications from the Index about this stolen #{@bike.type}
+                %span
+                  eg if we tweet about or someone searches for it's serial number
+
+  .input-group.form-foot
+    .control-group
+      %label.control-label{ for: 'bike_owner_email' }
+        Your email address
+      .controls
+        = f.email_field :owner_email
+    .submit-registration
+      = submit_tag "Register", class: "button-submit"
+      %span.what-you-register
+        this
+      = collection_select( :bike, :cycle_type_id, CycleType.all, :id, :name, required: true)
+  - if @phone
+    .input-group#optional-phone
+      .control-group
+        = f.label :phone, 'Phone - optional', class: "control-label"
+        .controls
+          = f.text_field :phone
+  .input-group.optional-group.form-photo-group
+  
+    - if @b_param.image.present? or @b_param.image_tmp.present?
+      %strong
+        Image has been uploaded
+    - else
+      .filefield-button
+        = f.file_field :image
+      #filepath
+      %span
+        Optional - upload a photo

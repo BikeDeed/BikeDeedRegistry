@@ -1,0 +1,42 @@
+AllCops:
+  TargetRubyVersion:
+    2.5
+  Exclude:
+    - 'bin/**/*'
+    - 'db/schema.rb'
+    - 'db/migrate/**/*'
+
+Style/Documentation:
+  Enabled: false
+
+FrozenStringLiteralComment:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
+
+Metrics/LineLength:
+  Enabled: false
+
+Style/AndOr:
+  Enabled: false
+
+ParameterLists:
+  CountKeywordArgs: false
+
+# https://anti-pattern.com/always-use-double-quoted-strings-in-ruby
+# All future updates should use double quotes, don't enforce so there aren't a ton of errors
+Style/StringLiterals:
+  EnforcedStyle: double_quotes # Always do it, lower cost cognitively
+  Enabled: false
+
+NumericLiterals:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Exclude:
+    - '**/*_spec.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'

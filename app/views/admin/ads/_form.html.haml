@@ -1,0 +1,23 @@
+.ad-edit-form#chosen-container
+  - if @ad.errors.any?
+    #alert-block
+      .alert.alert-error
+        %h4
+          Please fix the following
+          = pluralize(@ad.errors.count, "error")
+        %ul
+          - @ad.errors.full_messages.each do |msg|
+            %li
+              = msg
+  .ad-split-fields
+    .blog-field.chosen-select
+      = collection_select( :ad, :organization_id, @organizations, :id, :name, :required =>true, prompt: "Choose an organization")
+
+    .blog-field
+      = f.text_field :target_url, placeholder: 'Target url'
+
+  .blog-field
+    = f.text_field :title, placeholder: "Title"
+    
+  .blog-field.ad-body
+    = f.text_area :body, placeholder: 'ad body copy'

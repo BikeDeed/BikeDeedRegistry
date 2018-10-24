@@ -1,0 +1,220 @@
+%header.with-subtitle.padded
+  %h1
+    Viewing
+    = @organization.name
+  %p
+    = link_to "Edit organization", edit_admin_organization_url(@organization)
+  - if current_user.developer
+    %p.pull-right
+      = link_to 'edit custom layouts', admin_organization_custom_layouts_path(organization_id: @organization.to_param)
+
+%section
+  .dl-holder.padded
+    %dl.dl-horizontal
+      %dt Map
+      %dd
+        - unless @organization.approved
+          %strong
+            Not Approved
+          %small
+            therefor hidden
+          %br
+          %em
+            Would be
+        - if @organization.show_on_map
+          Shown on map
+        - else
+          %strong
+            Not shown
+
+      = @organization.dl_from_attribute("org_type", "Type")
+      %dt
+        Slug
+      %dd
+        #{@organization.slug} (#{ link_to 'embed', embed_registrations_url(organization_id: @organization.to_param) }, #{ link_to "org's manage", organization_manage_index_path(organization_id: @organization.to_param)})
+      = @organization.dl_from_attribute("access_token")
+      %dt Auto user email
+      %dd
+        = @organization.auto_user.email if @organization.auto_user.present?
+      %dt
+        Created at
+      %dd
+        %span.convertTime.preciseTime
+          = l @organization.created_at, format: :convert_time
+        %small.convertTimezone
+
+    %dl.dl-horizontal
+      = @organization.dl_list_item(@organization.users.count, "Users")
+      = @organization.dl_list_item(@organization.sent_invitation_count, "Sent invites")
+      = @organization.dl_list_item(link_to(@organization.available_invitation_count, admin_organization_invitation_url(organization_id: @organization.to_param)), link_to("Remaining invites", admin_organization_invitation_url(organization_id: @organization.to_param)))
+      = @organization.dl_from_attribute("website")
+      %dt Paid
+      %dd
+        - if @organization.is_paid
+          <strong>true</strong>
+        - else
+          - if LandingPages::ORGANIZATIONS.include?(@organization.slug)
+            %alert.alert-danger
+              IS NOT MARKED PAID BUT HAS A LANGING PAGE
+          - else
+            false
+        %em.less-strong
+          Set this via #{link_to "invoices", admin_organization_invoices_path(organization_id: @organization.to_param)}
+
+      %dt
+        Parent
+      %dd
+        - if @organization.parent_organization.present?
+          = link_to @organization.parent_organization.name, admin_organization_path(@organization.parent_organization)
+          %small.less-strong
+            if parent's paid, so's this
+      %dt
+        Children
+      %dd
+        - @organization.child_organizations.each do |org|
+          = link_to org.name, admin_organization_path(org)
+
+    - if @organization.is_suspended
+      %h2.red-text
+        Organization is suspended
+  %p
+    %strong
+      = link_to "Edit/Create Invoices", admin_organization_invoices_path(organization_id: @organization.to_param)
+    %em.less-strong
+      #{@organization.name} has #{pluralize(@organization.invoices.count, "invoice")}
+
+  - if @organization.is_paid
+    .well
+      .clearfix
+        %dl.dl-horizontal
+          %dt
+            Bike Search
+          %dd
+            - if @organization.has_bike_search
+              yes
+            - else
+              <small class="less-strong">no</small>
+          %dt
+            Templates
+          %dd
+            - if @organization.mail_snippets.any?
+              = @organization.mail_snippets.pluck(:name).to_sentence
+            - else
+              %small.less-strong
+                none
+          %dt
+            Landing Page
+          %dd
+            - if @organization.landing_html.present?
+              - if LandingPages::ORGANIZATIONS.include?(@organization.slug)
+                = link_to 'public landing page', "#{ENV['BASE_URL']}/#{@organization.slug}"
+              - else
+                landing page is not public - #{ link_to 'landing page', organization_landing_path(organization_id: @organization.to_param) }
+            - else
+              %small.less-strong
+                no landing page
+          %dt
+            Org emails
+          %dd
+            - if @organization.organization_message_kinds.any?
+              = @organization.organization_message_kinds.to_sentence
+            - else
+              <small class="less-strong">none</small>
+          %dt
+            Additional fields
+          %dd
+            - additional_fields = [@organization.use_additional_registration_field? ? "Additional serial" : nil, @organization.require_address_on_registration? ? "Registration address" : nil].compact
+            - if additional_fields.any?
+              = additional_fields.join(", ")
+            - else
+              <small class="less-strong">none</small>
+          %dt
+            Stickers
+          %dd
+            - if @organization.has_bike_codes
+              = link_to "Has stickers", organization_stickers_path(organization_id: @organization.to_param)
+            - else
+              %small.less-strong
+                no
+          %dt
+            Partial reg list
+          %dd
+            - if @organization.show_partial_registrations
+              yes
+            - else
+              <small class="less-strong">no</small>
+
+
+
+- if @bikes.present?
+  %h2.pull-left
+    = pluralize(@bikes.total_count, "Bike")
+  .paginate-container
+    = paginate @bikes
+  %section.full-screen-table
+    %table.table.table-striped.table-bordered
+      = render partial: "/admin/bikes/admin_bikes_table"
+  .paginate-container
+    = paginate @bikes
+
+
+%section.full-screen-table
+
+  %h2
+    = pluralize(@organization.users.count, "User")
+
+  %table#org-users-table.table.table-striped.table-bordered
+    %thead
+      %th
+        Edit&nbsp;
+      %th
+        Name
+      %th
+        Email
+      %th
+        Total indexed
+    %tbody
+      - @organization.users.each do |user|
+        %tr
+          %td
+            = link_to "&rarr;".html_safe, edit_admin_user_url(user)
+          %td
+            = user.name
+          %td
+            = user.email
+          %td
+            = user.creation_states.where(organization_id: @organization.id).count
+
+
+%ul
+  - @organization.users.each do |user|
+    %li
+      %p
+        = user.name
+        = user.email
+%hr
+- if @locations.any?
+  - if @locations.count > 1
+    %h3.padded
+      = pluralize(@locations.count, "Location")
+  .row-fluid.locations-list
+    - @locations.each do |location|
+      .span4
+        .alert.alert-info
+          - if !location.shown && @organization.allowed_show
+            %h2
+              Location is not visible! Try updating the organization
+          %p
+            Name:
+            = location.name
+          %p
+            Phone:
+            = location.display_phone
+          %p
+            Address:
+            = location.address
+
+.actions.padded
+  = link_to "Manage organization invitations", admin_organization_invitation_url(organization_id: @organization.to_param), class: "button-yellow"
+  = link_to "Edit", edit_admin_organization_url(@organization), class: "button-green"
+  = link_to "Delete #{@organization.name}!", admin_organization_url(@organization), method: :delete, confirm: "Are you sure?", class: "button-red"

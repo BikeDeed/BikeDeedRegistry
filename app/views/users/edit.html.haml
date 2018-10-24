@@ -1,0 +1,26 @@
+= form_for @user, multipart: true, html: { class: 'primary-edit-user-form' } do |f|
+  .form-well-container.container
+    .row
+      %nav.primary-edit-form-well-menu
+        %ul
+          - @edit_templates.each do |template, description|
+            %li
+              - classname = @edit_template == template ? 'active' : ''
+              %a{ href: my_account_path(page: template), class: classname }
+                %h4
+                  = description
+
+        .form-well-edit-page-select
+          %span.menu-select-overlay
+            You are editing
+          // ignore this select in dirty forms
+          %select.dirtyignore
+            - @edit_templates.each do |template, description|
+              %option{ selected: (@edit_template == template), value: my_account_path(page: template) }
+                = description
+        .edit-form-well-submit-wrapper
+          = hidden_field_tag :page, @edit_template
+          = submit_tag 'Save changes', class: 'btn btn-lg btn-primary'
+
+      .col-md-8.form-well
+        = render partial: "edit_#{@edit_template}", locals: { f: f }

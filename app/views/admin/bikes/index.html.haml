@@ -1,0 +1,42 @@
+%header.with-subtitle
+  %h1
+    Manage Bikes
+  = link_to "Manage component types", admin_ctypes_url, class: "sharing-links"
+- unless @unknown
+  %p
+    = link_to "Bikes with unknown manufacturers", missing_manufacturer_admin_bikes_url
+.special-search-field-container
+  .special-search-field
+    = form_tag admin_bikes_path, method: :get do
+      = text_field_tag :email, params[:email], placeholder: "Search bikes by email"
+      = submit_tag "Search", name: "search", class: "button-blue"
+
+  %p
+    There are currently #{number_with_delimiter(PublicImage.count)} bike images
+    %em
+      (#{PublicImage.where("created_at >= ?", Time.zone.now.beginning_of_day).count} today)
+  %h4
+    = number_with_delimiter(Bike.all.count)
+    indexed,
+    %em
+      (#{Bike.where("created_at >= ?", Time.zone.now.beginning_of_day).count} today)
+    = number_with_delimiter(Ownership.where(current: true).where(claimed: true).count)
+    are claimed
+
+
+- if @bikes.present?
+  .paginate-container
+    = paginate @bikes
+    %h4.pull-left
+      = pluralize(@bikes.total_count, 'Matching Bike')
+  %section.full-screen-table
+    %table.table.table-striped.table-bordered#admin-bikes-index
+      - if params[:multi_delete]
+        = render partial: "/admin/bikes/admin_bikes_table_multidelete"
+      - else
+        = render partial: "/admin/bikes/admin_bikes_table"
+  .paginate-container
+    = paginate @bikes
+- else
+  %h1.padded
+    No bikes found!
