@@ -59,7 +59,7 @@ module ControllerHelpers
         render action: :update_password and return true
       when /\A#{ENV['BASE_URL']}/, %r{\A/} # Either starting with our URL or /
         redirect_to(target) and return true
-      when 'https://facebook.com/bikeindex'
+      when 'https://facebook.com/BikeDeed'
         redirect_to(target) and return true
       end
     elsif session[:discourse_redirect]

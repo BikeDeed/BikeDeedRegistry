@@ -10,6 +10,6 @@ class ManufacturersController < ApplicationController
   end
 
   def tsv
-    redirect_to 'https://files.bikeindex.org/uploads/tsvs/manufacturers.tsv'
+    redirect_to 'https://files.bikedeed.io/uploads/tsvs/manufacturers.tsv'
   end
 end

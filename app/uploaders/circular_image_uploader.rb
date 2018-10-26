@@ -41,7 +41,7 @@ class CircularImageUploader < CarrierWave::Uploader::Base
   process :convert => 'jpg'
   
   # def default_url
-  #   'https://files.bikeindex.org/blank.png'
+  #   'https://files.bikedeed.io/blank.png'
   # end  
 
   version :large do

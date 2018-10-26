@@ -10,8 +10,8 @@ describe BulkImportWorker do
   let(:sample_csv_lines) do
     [
       %w[manufacturer model year color email serial],
-      ["Trek", "Roscoe 8", "2019", "Green", "test@bikeindex.org", "xyz_test"],
-      ["Surly", "Midnight Special", "2018", "White", "test2@bikeindex.org", "example"]
+      ["Trek", "Roscoe 8", "2019", "Green", "test@bikedeed.io", "xyz_test"],
+      ["Surly", "Midnight Special", "2018", "White", "test2@bikedeed.io", "example"]
     ]
   end
   let(:csv_lines) { sample_csv_lines }
@@ -66,7 +66,7 @@ describe BulkImportWorker do
         bike1 = bulk_import.bikes.reorder(:created_at).first
         expect(bike1.primary_frame_color).to eq green
         expect(bike1.serial_number).to eq "xyz_test"
-        expect(bike1.owner_email).to eq "test@bikeindex.org"
+        expect(bike1.owner_email).to eq "test@bikedeed.io"
         expect(bike1.manufacturer).to eq trek
         expect(bike1.creation_state.origin).to eq "bulk_import_worker"
         expect(bike1.creator).to eq organization.auto_user
@@ -76,7 +76,7 @@ describe BulkImportWorker do
         bike2 = bulk_import.bikes.reorder(:created_at).last
         expect(bike2.primary_frame_color).to eq white
         expect(bike2.serial_number).to eq "example"
-        expect(bike2.owner_email).to eq "test2@bikeindex.org"
+        expect(bike2.owner_email).to eq "test2@bikedeed.io"
         expect(bike2.manufacturer).to eq surly
         expect(bike2.creation_state.origin).to eq "bulk_import_worker"
         expect(bike2.creator).to eq organization.auto_user
@@ -172,7 +172,7 @@ describe BulkImportWorker do
       context "valid organization bike" do
         let(:organization) { FactoryGirl.create(:organization_with_auto_user) }
         let!(:bulk_import) { FactoryGirl.create(:bulk_import, organization: organization) }
-        let(:row) { { manufacturer: " Surly", serial: "na", color: nil, email: "test2@bikeindex.org", year: "2018", model: "Midnight Special" } }
+        let(:row) { { manufacturer: " Surly", serial: "na", color: nil, email: "test2@bikedeed.io", year: "2018", model: "Midnight Special" } }
         it "registers a bike" do
           expect(organization.auto_user).to_not eq bulk_import.user
           expect(Bike.count).to eq 0

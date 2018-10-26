@@ -22,7 +22,7 @@ class SendNewsletterWorker
     {
       options: { open_tracking: true, click_tracking: true },
       campaign_id: "#{template}_campaign",
-      return_path: 'support@bikeindex.org',
+      return_path: 'support@bikedeed.io',
       content: {
         template_id: template,
         use_draft_template: true

@@ -21,7 +21,7 @@ describe BikeCodesController do
       end
       context "bikeindex url" do
         it "succeeds" do
-          put :update, id: bike_code.code, bike_id: "https://bikeindex.org/bikes/#{bike.id} "
+          put :update, id: bike_code.code, bike_id: "https://bikedeed.io/bikes/#{bike.id} "
           expect(flash[:success]).to be_present
           bike_code.reload
           expect(bike_code.bike).to eq bike
@@ -29,7 +29,7 @@ describe BikeCodesController do
       end
       context "bike not found" do
         it "shows error message" do
-          put :update, id: bike_code.code, bike_id: "https://bikeindex.org/bikes/ "
+          put :update, id: bike_code.code, bike_id: "https://bikedeed.io/bikes/ "
           expect(flash[:error]).to be_present
           bike_code.reload
           expect(bike_code.bike).to be_nil
@@ -47,7 +47,7 @@ describe BikeCodesController do
         let(:bike_code) { FactoryGirl.create(:bike_code, bike_id: bike.id) }
         let(:bike2) { FactoryGirl.create(:bike) }
         it "responds with flash error" do
-          put :update, id: bike_code.code, bike_id: "https://bikeindex.org/bikes/#{bike2.id} "
+          put :update, id: bike_code.code, bike_id: "https://bikedeed.io/bikes/#{bike2.id} "
           expect(flash[:error]).to be_present
           bike_code.reload
           expect(bike_code.bike).to eq bike

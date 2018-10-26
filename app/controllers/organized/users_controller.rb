@@ -47,7 +47,7 @@ module Organized
 
     def create
       unless current_organization.available_invitation_count > 0
-        flash[:error] = "#{current_organization.name} is out of user invitations. Contact support@bikeindex.org"
+        flash[:error] = "#{current_organization.name} is out of user invitations. Contact support@bikedeed.io"
         redirect_to current_index_path and return
       end
       @organization_invitation = OrganizationInvitation.new(create_organization_invitation_params)
@@ -77,7 +77,7 @@ module Organized
 
     def reject_self_updates
       if @membership && @membership.user == current_user
-        flash[:error] = "Sorry, you can't remove yourself from the organization. Contact us at support@bikeindex.org if this is problematic."
+        flash[:error] = "Sorry, you can't remove yourself from the organization. Contact us at support@bikedeed.io if this is problematic."
         redirect_to organization_users_path(organization_id: current_organization) and return
       end
     end

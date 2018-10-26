@@ -26,7 +26,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
 
   # Fallback so the page doesn't break if the image isn't there
   def default_url
-    'https://files.bikeindex.org/blank.png'
+    'https://files.bikedeed.io/blank.png'
   end
 
   def store_dir

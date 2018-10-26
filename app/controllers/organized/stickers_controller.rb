@@ -15,7 +15,7 @@ module Organized
     # This is exactly the same as bike_codes_controller update - except the redirect is different
     def update
       if !@bike_code.claimable_by?(current_user)
-        flash[:error] = "You can't update that #{@bike_code.kind}. Please contact support@bikeindex.org if you think you should be able to"
+        flash[:error] = "You can't update that #{@bike_code.kind}. Please contact support@bikedeed.io if you think you should be able to"
       else
         bike_id = params[:bike_id].present? ? params[:bike_id] : params.dig(:bike_code, :bike_id)
         @bike_code.claim(current_user, bike_id)
@@ -55,7 +55,7 @@ module Organized
 
     def ensure_access_to_bike_codes!
       return true if current_organization.has_bike_codes || current_user.superuser?
-      flash[:error] = "Your organization doesn't have access to that, please contact Bike Index support"
+      flash[:error] = "Your organization doesn't have access to that, please contact BikeDeed support"
       redirect_to organization_bikes_path(organization_id: current_organization.to_param) and return
     end
   end

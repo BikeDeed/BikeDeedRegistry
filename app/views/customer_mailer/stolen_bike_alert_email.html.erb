@@ -15,8 +15,8 @@
       <h3 style="font-size: 14px; line-height: 17px; margin: 0; color: #999; font-weight: 400;">@<%= @info[:tweet_account_screen_name] %></h3>
     </a>
     <p style="margin:0;color:#333333;font-family:Georgia,'Times New Roman',serif;font-size:22px;line-height:27px;margin-bottom:0;margin-top:5px;">
-      <%= @info[:tweet_string].split('https://bikeindex.org')[0] %>
-      <a href="https://bikeindex.org/bikes/<%= @bike.id %>" style="border:none;color:#0084b4;text-decoration:none">BikeDeed link</a>
+      <%= @info[:tweet_string].split('https://bikedeed.io')[0] %>
+      <a href="https://bikedeed.io/bikes/<%= @bike.id %>" style="border:none;color:#0084b4;text-decoration:none">BikeDeed link</a>
     </p>
     <a href="https://twitter.com/<%= @info[:tweet_account_screen_name] %>/status/<%= @info[:tweet_id] %>" style="display:block;border:none;color:#0084b4;text-decoration:none;color:#999999;font-size: 12px; margin-top: 5px;" target="_blank"><%= Time.now.strftime("%I:%M %P - %d %b %y") %></a>
   </div>
@@ -32,7 +32,7 @@
 <div class="wrap" style="border: 1px solid #dfe3ee;border-radius: 4px;padding: 10px 5px;background: #f7f7f7; margin-bottom: 10px;">
   <h2 style="font-family: helvetica;font-size: 28px;text-align: center;margin: .5em 0 .7em; font-weight: 400;">Spread the word!</h2>
   <a href="http://www.facebook.com/share.php?u=<%= bike_url(@bike) %>" style="display: block;background: #dfe3ee;position: relative;border-radius: 4px;font-family: helvetica;height: 50px;">
-    <img src="https://files.bikeindex.org/facebook.png" style="height: 50px;width: 50px;display: block;float: left;">
+    <img src="https://files.bikedeed.io/facebook.png" style="height: 50px;width: 50px;display: block;float: left;">
     <span class="text" style="display: block;text-align: center;margin-top: .5em;line-height: 1.2em;padding: 1em 1em 0;">Share on Facebook - so everyone knows to watch out for your <%= @bike.type %>!</span>
   </a>
 </div>

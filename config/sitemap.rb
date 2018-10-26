@@ -20,7 +20,7 @@ SitemapGenerator::Sitemap.create do
       add("/news/#{b.title_slug}",
           priority: 0.9,
           news: {
-            publication_name: 'Bike Index Blog',
+            publication_name: 'BikeDeed Blog',
             publication_language: 'en',
             title: b.title,
             publication_date: b.published_at.strftime('%Y-%m-%dT%H:%M:%S+00:00')

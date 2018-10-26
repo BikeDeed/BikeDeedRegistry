@@ -19,7 +19,7 @@
 
 %body
   %header
-    - if @bike.manufacturer.logo && @bike.manufacturer.logo.url != "https://files.bikeindex.org/blank.png"
+    - if @bike.manufacturer.logo && @bike.manufacturer.logo.url != "https://files.bikedeed.io/blank.png"
       .mnfg-logo
         %img{ src: @bike.manufacturer.logo }
     - if @bike.public_images.present?
@@ -198,7 +198,7 @@
 
       .index-block{ class: ('stolen' if @bike.stolen) }
         .logo-block
-          %img{ src: "https://files.bikeindex.org/logo.png" }
+          %img{ src: "https://files.bikedeed.io/logo.png" }
         .index-text
           %h2
             Registration
@@ -207,4 +207,4 @@
           %p
             online @
             %a{href: bike_url(@bike) }
-              bikeindex.org#{bike_path(@bike)}
+              bikedeed.io#{bike_path(@bike)}

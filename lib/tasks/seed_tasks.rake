@@ -8,7 +8,7 @@ task seed_test_users_and_bikes: :environment do
     member: { name: 'member', email: 'member@example.com', password: 'please12', password_confirmation: 'please12', terms_of_service: true },
     user: { name: 'user', email: 'user@example.com', password: 'please12', password_confirmation: 'please12', terms_of_service: true },
     api_accessor: { name: 'Api Accessor', email: 'api@example.com', password: 'please12', password_confirmation: 'please12', terms_of_service: true },
-    example_user: { name: 'Example user', email: 'example_user@bikeindex.org', password: 'please12', password_confirmation: 'please12', terms_of_service: true }
+    example_user: { name: 'Example user', email: 'example_user@bikedeed.io', password: 'please12', password_confirmation: 'please12', terms_of_service: true }
   }
 
   user_attrs.values.each do |attributes|
@@ -23,7 +23,7 @@ task seed_test_users_and_bikes: :environment do
   membership.save
   org = Organization.create(name: 'Example organization', website: '', short_name: 'Example org', show_on_map: false, access_token: '7fb1c38526e57a98ec57760aa7f84992')
   org.save
-  membership = Membership.create(organization_id: org.id, user_id: User.find_by_email('example_user@bikeindex.org').id, role: 'member')
+  membership = Membership.create(organization_id: org.id, user_id: User.find_by_email('example_user@bikedeed.io').id, role: 'member')
   membership.save
   org.save
   puts "Users added successfully\n"

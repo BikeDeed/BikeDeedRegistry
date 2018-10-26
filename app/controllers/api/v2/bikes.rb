@@ -224,7 +224,7 @@ module API
 
             Send a stolen bike notification.
 
-            Your application has to be approved to be able to do this. Email support@bikeindex.org to get access.
+            Your application has to be approved to be able to do this. Email support@bikedeed.io to get access.
 
             Before your application is approved you can send notifications to yourself (to a bike that you own that's stolen).
           NOTE

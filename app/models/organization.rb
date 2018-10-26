@@ -33,7 +33,7 @@ class Organization < ActiveRecord::Base
   has_many :public_images, as: :imageable, dependent: :destroy
 
   validates_presence_of :name
-  validates_uniqueness_of :slug, message: "Slug error. You shouldn't see this - please contact admin@bikeindex.org"
+  validates_uniqueness_of :slug, message: "Slug error. You shouldn't see this - please contact admin@bikedeed.io"
 
   default_scope { order(:name) }
 

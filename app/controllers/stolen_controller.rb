@@ -8,7 +8,7 @@ class StolenController < ApplicationController
   end
 
   def current_tsv
-    redirect_to 'https://files.bikeindex.org/uploads/tsvs/current_stolen_bikes.tsv'
+    redirect_to 'https://files.bikedeed.io/uploads/tsvs/current_stolen_bikes.tsv'
   end
 
   def show

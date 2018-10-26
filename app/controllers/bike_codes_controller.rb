@@ -4,7 +4,7 @@ class BikeCodesController < ApplicationController
 
   def update
     if !@bike_code.claimable_by?(current_user)
-      flash[:error] = "You can't update that #{@bike_code.kind}. Please contact support@bikeindex.org if you think you should be able to"
+      flash[:error] = "You can't update that #{@bike_code.kind}. Please contact support@bikedeed.io if you think you should be able to"
     else
       @bike_code.claim(current_user, params[:bike_id])
       if @bike_code.errors.any?

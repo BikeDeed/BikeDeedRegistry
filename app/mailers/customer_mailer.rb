@@ -67,6 +67,6 @@ class CustomerMailer < ActionMailer::Base
     @_action_has_layout = false # layout is manually included here
     mail(to: @user.email,
          from: '"Lily Williams" <lily@bikedeed.io>',
-         subject: 'Bike Index Terms and Privacy Policy Update')
+         subject: 'BikeDeed Terms and Privacy Policy Update')
   end
 end

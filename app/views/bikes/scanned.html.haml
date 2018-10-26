@@ -20,14 +20,14 @@
       %h3
         You have claimed the maximum permitted number of Bike Codes.
       %p
-        Please email #{ link_to "support@bikeindex.org", "mailto:support@bikeindex.org" } if you don't understand why you're seeing this message or if you need an exception made.
+        Please email #{ link_to "support@bikedeed.io", "mailto:support@bikedeed.io" } if you don't understand why you're seeing this message or if you need an exception made.
     - else
       %p
         You can enter the URL of the bike you would like to link this #{@bike_code.kind} to:
       = form_tag bike_code_path(id: @bike_code.code, organization_id: @bike_code.organization_id), method: "PUT", class: "row" do
         .col-sm-8.col-lg-10
           .form-group
-            = text_field_tag :bike_id, "", placeholder: "https://bikeindex.org/bikes/1234", class: "form-control"
+            = text_field_tag :bike_id, "", placeholder: "https://bikedeed.io/bikes/1234", class: "form-control"
         .col-sm-4.col-lg-2
           = submit_tag "Update", class: "btn btn-success"
         

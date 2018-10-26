@@ -13,7 +13,7 @@
 
     - if current_user.present? && current_user.memberships.present?
       %p
-        All you have to do is go to #{ link_to 'bikeindex.org/connect_lightspeed', connect_lightspeed_path }, where you'll be asked to authorize BikeDeed to access your Lightspeed Account.
+        All you have to do is go to #{ link_to 'bikedeed.io/connect_lightspeed', connect_lightspeed_path }, where you'll be asked to authorize BikeDeed to access your Lightspeed Account.
     - else
       %p
         The first step is to create an account for yourself and your shop - you can do that <a href="#add_organization" class="scroll-to-ref">at the bottom of this page</a>
@@ -45,7 +45,7 @@
     %li
       %span.blue-bullet
       %p
-        We're happy to answer any questions you have about making BikeDeed work with Lightspeed Retail and we're always looking for ways to improve the integration. Please #{link_to "support@bikeindex.org", "mailto:support@bikeindex.org"} with any questions, concerns, comments, or suggestions.
+        We're happy to answer any questions you have about making BikeDeed work with Lightspeed Retail and we're always looking for ways to improve the integration. Please #{link_to "support@bikedeed.io", "mailto:support@bikedeed.io"} with any questions, concerns, comments, or suggestions.
 
 
     %blockquote
@@ -101,7 +101,7 @@
   /               - if current_user.present? && current_user.memberships.count > 0
   /                 - org = current_user.organizations.first
   /                 Go to the
-  /                 %a{ href: "https://pos_integration.bikeindex.org/organizations/connect?id=#{org.slug}&access_token=#{org.access_token}"}
+  /                 %a{ href: "https://pos_integration.bikedeed.io/organizations/connect?id=#{org.slug}&access_token=#{org.access_token}"}
   /                   Lightspeed Retail Integration
   /               - else
   /                 Click on the Lightspeed Retail Integration button (at the bottom of the page for your organization once you've signed up).
@@ -119,8 +119,8 @@
   /           %p
   /             We will not automatically register bikes that were sold before you signed up for the integration.
   /           %p
-  /             You can register these bikes manually or #{link_to "contact us", "mailto:seth@bikeindex.org"} for assistance.
-  /           /   You can register these bikes by clicking edit, checking the "register despite issues" checkbox, and clicking the "Update bike" button. If you'd like to register a large quantity, #{link_to "contact us", "mailto:seth@bikeindex.org"}.
+  /             You can register these bikes manually or #{link_to "contact us", "mailto:seth@bikedeed.io"} for assistance.
+  /           /   You can register these bikes by clicking edit, checking the "register despite issues" checkbox, and clicking the "Update bike" button. If you'd like to register a large quantity, #{link_to "contact us", "mailto:seth@bikedeed.io"}.
 
   %hr
 

@@ -13,7 +13,7 @@ module Api
               contact_type: 'stolen_twitter_alerter',
               title: title_tag(bike),
               user_email: bike.owner_email,
-              creator_email: 'bryan@bikeindex.org',
+              creator_email: 'bryan@bikedeed.io',
               info_hash: params[:notification_hash])
             if customer_contact.save
               EmailStolenBikeAlertWorker.perform_async(customer_contact.id)

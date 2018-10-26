@@ -32,7 +32,7 @@ class Admin::DashboardController < Admin::BaseController
   def destroy_example_bikes
     org = Organization.friendly_find('bikeindex')
     bikes = Bike.unscoped.where(example: true)
-    # The example bikes for the API docs on production are created by Bike Index Administrators
+    # The example bikes for the API docs on production are created by BikeDeed Administrators
     # This way we don't clear them when we clear the rest of the example bikes
     bikes.each { |b| b.destroy unless b.creation_organization_id == org.id }
     flash[:success] = "Example bikes cleared!"

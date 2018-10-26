@@ -445,7 +445,7 @@ describe User do
     it 'returns twitter if user twitter' do
       user = User.new(show_bikes: false, username: 'coolstuff', twitter: 'bikeindex')
       # pp user
-      expect(user.userlink).to eq('https://twitter.com/bikeindex')
+      expect(user.userlink).to eq('https://twitter.com/BikeDeed')
     end
   end
 

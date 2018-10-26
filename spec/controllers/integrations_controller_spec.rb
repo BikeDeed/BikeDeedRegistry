@@ -46,7 +46,7 @@ describe IntegrationsController do
   describe 'failure' do
     it 'renders sessions new with a flash' do
       get :integrations_controller_creation_error, message: 'csrf_detected', strategy: 'facebook'
-      expect(flash[:error]).to match('email us at contact@bikeindex.org')
+      expect(flash[:error]).to match('email us at contact@bikedeed.io')
       expect(response).to redirect_to new_session_path
     end
   end

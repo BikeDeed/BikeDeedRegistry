@@ -170,7 +170,7 @@ describe OrganizationsController do
       include_context :logged_in_as_organization_admin
       it 'redirects to posintegration' do
         get :connect_lightspeed
-        expect(response).to redirect_to 'https://posintegration.bikeindex.org'
+        expect(response).to redirect_to 'https://posintegration.bikedeed.io'
       end
     end
     context 'with user without organization' do

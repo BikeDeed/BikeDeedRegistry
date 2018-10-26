@@ -112,7 +112,7 @@ class User < ActiveRecord::Base
   def ensure_unique_email
     return true unless self.class.fuzzy_confirmed_or_unconfirmed_email_find(email)
     return true if id.present? # Because existing users shouldn't see this error
-    errors.add(:email, 'That email is already signed up on Bike Index.')
+    errors.add(:email, 'That email is already signed up on BikeDeed.')
   end
 
   def perform_create_jobs

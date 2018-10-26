@@ -112,17 +112,17 @@ class UsersController < ApplicationController
         if params[:user][:terms_of_service] == '1'
           @user.terms_of_service = true
           @user.save
-          flash[:success] = 'Thanks! Now you can use Bike Index'
+          flash[:success] = 'Thanks! Now you can use BikeDeed'
           redirect_to user_home_url and return
         else
-          flash[:notice] = 'You have to accept the Terms of Service if you would like to use Bike Index'
+          flash[:notice] = 'You have to accept the Terms of Service if you would like to use BikeDeed'
           redirect_to accept_vendor_terms_url and return
         end
       elsif params[:user][:vendor_terms_of_service].present?
         if params[:user][:vendor_terms_of_service] == '1'
           @user.accept_vendor_terms_of_service
           if @user.memberships.any?
-            flash[:success] = "Thanks! Now you can use Bike Index as #{@user.memberships.first.organization.name}"
+            flash[:success] = "Thanks! Now you can use BikeDeed as #{@user.memberships.first.organization.name}"
           else
             flash[:success] = 'Thanks for accepting the terms of service!'
           end
@@ -130,7 +130,7 @@ class UsersController < ApplicationController
           # TODO: Redirect to the correct page, somehow this breaks things right now though.
           # redirect_to organization_home and return
         else
-          redirect_to accept_vendor_terms_url, notice: 'You have to accept the Terms of Service if you would like to use Bike Index as through the organization' and return
+          redirect_to accept_vendor_terms_url, notice: 'You have to accept the Terms of Service if you would like to use BikeDeed as through the organization' and return
         end
       end
       if params[:user][:password].present?
@@ -165,7 +165,7 @@ class UsersController < ApplicationController
   def unsubscribe
     user = User.find_by_username(params[:id])
     user.update_attribute :is_emailable, false if user.present?
-    flash[:success] = 'You have been unsubscribed from Bike Index updates'
+    flash[:success] = 'You have been unsubscribed from BikeDeed updates'
     redirect_to user_root_url and return
   end
 

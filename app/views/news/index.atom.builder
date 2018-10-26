@@ -1,6 +1,6 @@
 xml.instruct!
 xml.feed('xml:lang' => 'en-US', xmlns: 'http://www.w3.org/2005/Atom')  do |feed|
-  feed.id 'https://bikeindex.org/news.atom'
+  feed.id 'https://bikedeed.io/news.atom'
   feed.link rel: 'alternate', type: 'text/html', href: news_index_url
   feed.link rel: 'self', type: 'application/atom+xml', href: news_index_url('atom')
   feed.title "Bike Index news"

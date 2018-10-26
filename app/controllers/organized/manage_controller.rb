@@ -26,7 +26,7 @@ module Organized
     def destroy
       organization_name = current_organization.name
       if current_organization.is_paid
-        flash[:info] = "Please contact support@bikeindex.org to delete #{organization_name}"
+        flash[:info] = "Please contact support@bikedeed.io to delete #{organization_name}"
         redirect_to current_index_path and return
       end
       notify_admins('organization_destroyed')

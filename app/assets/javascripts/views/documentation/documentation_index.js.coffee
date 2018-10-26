@@ -68,14 +68,14 @@ class BikeIndex.Views.DocumentationIndex extends Backbone.View
       color: "Red"
       rear_wheel_bsd: 559
       rear_tire_narrow: false
-      owner_email: "cargo_bike_owner@bikeindex.org"
+      owner_email: "cargo_bike_owner@bikedeed.io"
       cycle_type_slug: "cargo"
       frame_material_slug: "steel"
       handlebar_type_slug: "flat"
       description: "Amazing cargo bike. Has made me car free!"
     photos = [
-      "https://files.bikeindex.org/uploads/Pu/545/large_8465603755_223358d8b4_b.jpg"
-      "https://files.bikeindex.org/uploads/Pu/544/large_8433449838_8660d50a08_b.jpg"
+      "https://files.bikedeed.io/uploads/Pu/545/large_8465603755_223358d8b4_b.jpg"
+      "https://files.bikedeed.io/uploads/Pu/544/large_8433449838_8660d50a08_b.jpg"
     ]
     components = [
       manufacturer: "SRAM"
@@ -108,7 +108,7 @@ class BikeIndex.Views.DocumentationIndex extends Backbone.View
       color: "Blue"
       rear_tire_narrow: false
       rear_wheel_bsd: "559"
-      owner_email: "new_bike_owner@bikeindex.org"
+      owner_email: "new_bike_owner@bikedeed.io"
     
     $.ajax
       url: $('#bike_basic').attr('data-url')
@@ -131,7 +131,7 @@ class BikeIndex.Views.DocumentationIndex extends Backbone.View
       color: "Black"
       rear_wheel_bsd: 559
       rear_tire_narrow: false
-      owner_email: "stolen_bike_owner@bikeindex.org"
+      owner_email: "stolen_bike_owner@bikedeed.io"
 
     stolen_record =
       date_stolen: "03-01-2013"

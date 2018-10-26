@@ -56,7 +56,7 @@ describe Blog do
     it 'creates the body abbr from a listicle' do
       @user = FactoryGirl.create(:user)
       blog = Blog.create(title: 'Blog title', user_id: @user.id, published_at: Time.now, body: 'stuff', is_listicle: true)
-      Listicle.create(blog_id: blog.id, body: "View the link\n[here](http://something)\n\n<img class='post-image' src='https://files.bikeindex.org/uploads/Pu/1003/large_photo__6_.JPG' alt='Bike Index shirt and stickers'>\n![PBR, a bike bag and drawings](http://imgur.com/e4zzEjP.jpg) and also this")
+      Listicle.create(blog_id: blog.id, body: "View the link\n[here](http://something)\n\n<img class='post-image' src='https://files.bikedeed.io/uploads/Pu/1003/large_photo__6_.JPG' alt='BikeDeed shirt and stickers'>\n![PBR, a bike bag and drawings](http://imgur.com/e4zzEjP.jpg) and also this")
       blog.reload.save
       expect(blog.reload.body_abbr).to eq('View the link here and also this')
     end
@@ -66,7 +66,7 @@ describe Blog do
       # Also, it would be cool if we could end on a word instead of in the middle of one...
       @user = FactoryGirl.create(:user)
       blog = Blog.new(title: 'Blog title', user_id: @user.id, published_at: Time.now)
-      blog.body = "View the link\n[here](http://something)\n\n<img class='post-image' src='https://files.bikeindex.org/uploads/Pu/1003/large_photo__6_.JPG' alt='Bike Index shirt and stickers'>\n![PBR, a bike bag and drawings](http://imgur.com/e4zzEjP.jpg) and also this"
+      blog.body = "View the link\n[here](http://something)\n\n<img class='post-image' src='https://files.bikedeed.io/uploads/Pu/1003/large_photo__6_.JPG' alt='BikeDeed shirt and stickers'>\n![PBR, a bike bag and drawings](http://imgur.com/e4zzEjP.jpg) and also this"
       blog.save
       expect(blog.body_abbr).to eq('View the link here and also this')
     end

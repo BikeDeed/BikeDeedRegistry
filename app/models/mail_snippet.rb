@@ -23,7 +23,7 @@ class MailSnippet < ActiveRecord::Base
     {
       header: "Top of email block",
       welcome: "Below header",
-      footer: "Above <3 <3 <3 <3 Bike Index Team",
+      footer: "Above <3 <3 <3 <3 BikeDeed Team",
       security: "How to keep your bike safe, in email \"finished registration\"",
       abandoned_bike: "Geocoded abandoned bike email"
     }.as_json

@@ -58,7 +58,7 @@ describe OrganizationExportWorker do
       # Setting up what we have, rather than waiting on everything
       let(:export) { FactoryGirl.create(:export_organization, progress: "pending", file: nil, options: { headers: Export::PERMITTED_HEADERS }) }
       let(:secondary_color) { FactoryGirl.create(:color) }
-      let(:email) { "testly@bikeindex.org" }
+      let(:email) { "testly@bikedeed.io" }
       let(:bike) do
         FactoryGirl.create(:creation_organization_bike,
                            organization: organization,
@@ -70,7 +70,7 @@ describe OrganizationExportWorker do
                            secondary_frame_color: secondary_color,
                            owner_email: email)
       end
-      let!(:ownership) { FactoryGirl.create(:ownership, bike: bike, creator: FactoryGirl.create(:confirmed_user, name: "other person"), user: FactoryGirl.create(:user, name: "George Smith", email: "testly@bikeindex.org")) }
+      let!(:ownership) { FactoryGirl.create(:ownership, bike: bike, creator: FactoryGirl.create(:confirmed_user, name: "other person"), user: FactoryGirl.create(:user, name: "George Smith", email: "testly@bikedeed.io")) }
       let(:csv_lines) { [export.headers, fancy_bike_values] }
       let(:fancy_bike_values) do
         [

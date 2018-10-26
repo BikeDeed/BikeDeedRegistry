@@ -19,7 +19,7 @@ describe FileCacheMaintainer do
 
   describe 'blacklist_ids' do
     it 'gets and sets the ids' do
-      FileCacheMaintainer.reset_blacklist_ids([1, 1, 2, 4, 'https://bikeindex.org/admin/bikes/6'])
+      FileCacheMaintainer.reset_blacklist_ids([1, 1, 2, 4, 'https://bikedeed.io/admin/bikes/6'])
       expect(FileCacheMaintainer.blacklist).to eq %w(1 2 4 6)
     end
     it "doesn't break if it's empty" do
@@ -31,7 +31,7 @@ describe FileCacheMaintainer do
   describe 'blacklist_include' do
     it 'checks if blacklist includes something' do
       FileCacheMaintainer.reset_blacklist_ids([1010101, 2, 4, 6])
-      expect(FileCacheMaintainer.blacklist_include?('http://bikeindex.org/bikes/1010101/edit')).to be_truthy
+      expect(FileCacheMaintainer.blacklist_include?('http://bikedeed.io/bikes/1010101/edit')).to be_truthy
       expect(FileCacheMaintainer.blacklist_include?(7)).to be_falsey
     end
   end
@@ -49,10 +49,10 @@ describe FileCacheMaintainer do
 
     it 'returns the way we want - dailys after non daily' do
       t = Time.now
-      FileCacheMaintainer.reset_file_info('https://files.bikeindex.org/uploads/tsvs/approved_current_stolen_bikes.tsv', t)
-      FileCacheMaintainer.update_file_info('https://files.bikeindex.org/uploads/tsvs/current_stolen_bikes.tsv')
-      FileCacheMaintainer.update_file_info("https://files.bikeindex.org/uploads/tsvs/#{Time.now.strftime('%Y_%-m_%-d')}_approved_current_stolen_bikes.tsv")
-      FileCacheMaintainer.update_file_info("https://files.bikeindex.org/uploads/tsvs/#{Time.now.strftime('%Y_%-m_%-d')}_current_stolen_bikes.tsv")
+      FileCacheMaintainer.reset_file_info('https://files.bikedeed.io/uploads/tsvs/approved_current_stolen_bikes.tsv', t)
+      FileCacheMaintainer.update_file_info('https://files.bikedeed.io/uploads/tsvs/current_stolen_bikes.tsv')
+      FileCacheMaintainer.update_file_info("https://files.bikedeed.io/uploads/tsvs/#{Time.now.strftime('%Y_%-m_%-d')}_approved_current_stolen_bikes.tsv")
+      FileCacheMaintainer.update_file_info("https://files.bikedeed.io/uploads/tsvs/#{Time.now.strftime('%Y_%-m_%-d')}_current_stolen_bikes.tsv")
       FileCacheMaintainer.files.each_with_index do |file, index|
         if index < 2
           expect(['approved_current_stolen_bikes.tsv', 'current_stolen_bikes.tsv'].include?(file[:filename])).to be_truthy

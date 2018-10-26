@@ -5,24 +5,24 @@ describe ApplicationHelper do
     context 'without a class' do
       it 'returns the link active if it ought to be' do
         allow(view).to receive(:current_page?).and_return(true)
-        generated = '<a class=" active" id="" href="http://bikeindex.org">Bike Index about</a>'
-        expect(helper.active_link('Bike Index about', 'http://bikeindex.org')).to eq generated
+        generated = '<a class=" active" id="" href="http://bikedeed.io">BikeDeed about</a>'
+        expect(helper.active_link('BikeDeed about', 'http://bikedeed.io')).to eq generated
       end
     end
     context 'match controller true' do
       let(:request) { double('request', url: new_bike_url) }
       before { allow(helper).to receive(:request).and_return(request) }
       it 'returns the link active if it is a bikes page' do
-        generated = '<a class="seeeeeeee active" id="" href="' + new_bike_url + '">Bike Index bikes page</a>'
-        result = helper.active_link('Bike Index bikes page', new_bike_url, match_controller: true, class_name: 'seeeeeeee')
+        generated = '<a class="seeeeeeee active" id="" href="' + new_bike_url + '">BikeDeed bikes page</a>'
+        result = helper.active_link('BikeDeed bikes page', new_bike_url, match_controller: true, class_name: 'seeeeeeee')
         expect(result).to eq generated
       end
     end
     context 'current with a class' do
       it 'returns the link active if it ought to be' do
         allow(view).to receive(:current_page?).and_return(true)
-        generated = '<a class="nav-party-link active" id="" href="http://bikeindex.org">Bike Index about</a>'
-        result = helper.active_link('Bike Index about', 'http://bikeindex.org', class_name: 'nav-party-link')
+        generated = '<a class="nav-party-link active" id="" href="http://bikedeed.io">BikeDeed about</a>'
+        result = helper.active_link('BikeDeed about', 'http://bikedeed.io', class_name: 'nav-party-link')
         expect(result).to eq generated
       end
     end

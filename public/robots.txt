@@ -1,1 +1,1 @@
-Sitemap: https://bikeindex.org/sitemap.xml.gz
+Sitemap: https://bikedeed.io/sitemap.xml.gz

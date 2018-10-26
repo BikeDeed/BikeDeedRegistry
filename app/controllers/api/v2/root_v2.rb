@@ -25,10 +25,10 @@ module API
                                 cascade: false,
                                 info: {
                                   title: 'BikeIndex API v2',
-                                  description: "This is the API for Bike Index. It's authenticated with OAuth2 and is generally pretty awesome",
-                                  contact: 'support@bikeindex.org',
+                                  description: "This is the API for BikeDeed. It's authenticated with OAuth2 and is generally pretty awesome",
+                                  contact: 'support@bikedeed.io',
                                   license_url: 'https://github.com/bikeindex/bike_index/blob/master/LICENSE',
-                                  terms_of_service_url: 'https://bikeindex.org/terms'
+                                  terms_of_service_url: 'https://bikedeed.io/terms'
                                 }
       route :any, '*path' do
         raise StandardError, 'Unable to find endpoint'

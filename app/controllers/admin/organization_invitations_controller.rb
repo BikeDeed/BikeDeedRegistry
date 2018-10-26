@@ -44,7 +44,7 @@ class Admin::OrganizationInvitationsController < Admin::BaseController
         redirect_to edit_admin_organization_invitation_url(@organization_invitation.id, organization_id: @organization_invitation.organization.to_param)
       end
     else
-      flash[:error] = 'Oh no! This organization has no more invitations. Email contact@bikeindex.org for help'
+      flash[:error] = 'Oh no! This organization has no more invitations. Email contact@bikedeed.io for help'
       redirect_to root_url
     end
   end

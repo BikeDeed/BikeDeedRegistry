@@ -228,7 +228,7 @@ describe Api::V1::BikesController do
         }
         photos = [
           'http://i.imgur.com/lybYl1l.jpg',
-          'http://bikeindex.org/not_actually_a_thing_404_and_shit'
+          'http://bikedeed.io/not_actually_a_thing_404_and_shit'
         ]
         post :create, bike: bike_attrs, organization_slug: @organization.slug, access_token: @organization.access_token, photos: photos
         bike = Bike.where(serial_number: '69 photo-test').first

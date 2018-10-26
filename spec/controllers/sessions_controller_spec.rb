@@ -73,18 +73,18 @@ describe SessionsController do
           expect(response).to redirect_to oauth_authorization_url(cool_thing: true)
         end
 
-        it 'redirects to facebook.com/bikeindex' do
+        it 'redirects to facebook.com/BikeDeed' do
           expect(@user).to receive(:authenticate).and_return(true)
-          session[:return_to] = 'https://facebook.com/bikeindex'
+          session[:return_to] = 'https://facebook.com/BikeDeed'
           post :create, session: { thing: 'asdfasdf' }
           expect(User.from_auth(cookies.signed[:auth])).to eq(@user)
           expect(session[:return_to]).to be_nil
-          expect(response).to redirect_to 'https://facebook.com/bikeindex'
+          expect(response).to redirect_to 'https://facebook.com/BikeDeed'
         end
 
         it 'does not redirect to a random facebook page' do
           expect(@user).to receive(:authenticate).and_return(true)
-          session[:return_to] = 'https://facebook.com/bikeindex-mean-place'
+          session[:return_to] = 'https://facebook.com/BikeDeed-mean-place'
           post :create, session: { thing: 'asdfasdf' }
           expect(User.from_auth(cookies.signed[:auth])).to eq(@user)
           expect(session[:return_to]).to be_nil

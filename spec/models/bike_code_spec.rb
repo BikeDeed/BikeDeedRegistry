@@ -2,9 +2,9 @@ require "spec_helper"
 
 RSpec.describe BikeCode, type: :model do
   describe "normalize_code" do
-    let(:url) { "https://bikeindex.org/bikes/scanned/000012?organization_id=palo-party" }
-    let(:url2) { "bikeindex.org/bikes/000012/scanned?organization_id=bikeindex" }
-    let(:url2) { "www.bikeindex.org/bikes/12/scanned?organization_id=bikeindex" }
+    let(:url) { "https://bikedeed.io/bikes/scanned/000012?organization_id=palo-party" }
+    let(:url2) { "bikedeed.io/bikes/000012/scanned?organization_id=bikeindex" }
+    let(:url2) { "www.bikedeed.io/bikes/12/scanned?organization_id=bikeindex" }
     let(:code) { "bike_code999" }
     it "strips the right stuff" do
       expect(BikeCode.normalize_code(code)).to eq "BIKE_CODE999"
@@ -28,7 +28,7 @@ RSpec.describe BikeCode, type: :model do
       expect(BikeCode.sticker.count).to eq 1
       expect(BikeCode.lookup("000012", organization_id: organization.id)).to eq sticker
       expect(BikeCode.lookup("000012", organization_id: organization.to_param)).to eq sticker
-      expect(BikeCode.lookup("https://bikeindex.org/bikes/scanned/000012?organization_id=#{organization.short_name}", organization_id: organization.short_name)).to eq sticker
+      expect(BikeCode.lookup("https://bikedeed.io/bikes/scanned/000012?organization_id=#{organization.short_name}", organization_id: organization.short_name)).to eq sticker
       expect(BikeCode.lookup("000012", organization_id: organization.name)).to eq sticker
       expect(BikeCode.lookup("000012", organization_id: "whateves")).to eq spokecard
       expect(BikeCode.lookup("000012")).to eq spokecard
@@ -117,20 +117,20 @@ RSpec.describe BikeCode, type: :model do
       bike_code.claim(user, bike.id)
       expect(bike_code.user).to eq user
       expect(bike_code.bike).to eq bike
-      bike_code.claim(user, "https://bikeindex.org/bikes/9#{bike.id}")
+      bike_code.claim(user, "https://bikedeed.io/bikes/9#{bike.id}")
       expect(bike_code.errors.full_messages).to be_present
       expect(bike_code.bike).to eq bike
-      bike_code.claim(user, "https://bikeindex.org/bikes?per_page=200")
+      bike_code.claim(user, "https://bikedeed.io/bikes?per_page=200")
       expect(bike_code.errors.full_messages).to be_present
       expect(bike_code.bike).to eq bike
       expect(bike_code.claimed_at).to be_within(1.second).of Time.now
     end
     context "with weird strings" do
       it "updates" do
-        bike_code.claim(user, "\nwww.bikeindex.org/bikes/#{bike.id}/edit")
+        bike_code.claim(user, "\nwww.bikedeed.io/bikes/#{bike.id}/edit")
         expect(bike_code.errors.full_messages).to_not be_present
         expect(bike_code.bike).to eq bike
-        bike_code.claim(user, "\nwww.bikeindex.org/bikes/#{bike.id} ")
+        bike_code.claim(user, "\nwww.bikedeed.io/bikes/#{bike.id} ")
         expect(bike_code.errors.full_messages).to_not be_present
         expect(bike_code.bike).to eq bike
       end
@@ -151,10 +151,10 @@ RSpec.describe BikeCode, type: :model do
         bike_code.claim(user, "\n ")
         expect(bike_code.errors.full_messages).to be_present
       end
-      context "unclaiming with bikeindex.org url" do
+      context "unclaiming with bikedeed.io url" do
         it "adds an error" do
-          # Doesn't permit unclaiming by a bikeindex.org/ url, because that's probably a mistake
-          bike_code.claim(user, "www.bikeindex.org/bikes/ ")
+          # Doesn't permit unclaiming by a bikedeed.io/ url, because that's probably a mistake
+          bike_code.claim(user, "www.bikedeed.io/bikes/ ")
           expect(bike_code.errors.full_messages).to be_present
           expect(bike_code.bike).to eq bike
         end

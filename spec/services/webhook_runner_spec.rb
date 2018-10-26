@@ -4,7 +4,7 @@ describe WebhookRunner do
   describe 'make_request' do
     it "doesn't error if webhook doesn't return" do
       runner = WebhookRunner.new
-      response = runner.make_request('https://testing.bikeindex.org/about/something')
+      response = runner.make_request('https://testing.bikedeed.io/about/something')
       expect(response).to be_present
     end
   end

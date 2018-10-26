@@ -2,7 +2,7 @@
 %html
   %head
     = header_tags
-    <link rel='shortcut icon' href='/fav.ico' />
+    <link rel='shortcut icon' href='/favicon.png' />
     = stylesheet_link_tag 'documentation_v2', media: "all"
     = stylesheet_link_tag 'og_application', media: 'all'
     - api_version = 'v3'
@@ -140,6 +140,6 @@
         .form-group
           %label.control-label{ for: 'input_baseUrl' }
             Swagger doc url
-          %input#input_baseUrl.form-control{:name => "baseUrl", :placeholder => "https://bikeindex.org/api/v3", :type => "text"}
+          %input#input_baseUrl.form-control{:name => "baseUrl", :placeholder => "https://bikedeed.io/api/v3", :type => "text"}
 
     = render 'shared/footer_updated'

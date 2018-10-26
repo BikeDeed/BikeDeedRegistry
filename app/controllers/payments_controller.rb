@@ -38,7 +38,7 @@ class PaymentsController < ApplicationController
       charge = Stripe::Charge.create(
         customer:     customer.id,
         amount:       amount_cents,
-        description:  'Bike Index customer',
+        description:  'BikeDeed customer',
         currency:     'usd'
       )
       charge_time = charge.created

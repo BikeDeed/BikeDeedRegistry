@@ -21,9 +21,9 @@ describe LandingPagesController do
         expect(response).to render_template(landing_type)
         expect(response).to render_with_layout('application_revised')
         if landing_type == 'for_advocacy'
-          expect(title).to eq 'Bike Index for Advocacy Organizations'
+          expect(title).to eq 'BikeDeed for Advocacy Organizations'
         else
-          expect(title).to eq "Bike Index #{landing_type.titleize.gsub(/\AF/, 'f')}"
+          expect(title).to eq "BikeDeed #{landing_type.titleize.gsub(/\AF/, 'f')}"
         end
       end
     end

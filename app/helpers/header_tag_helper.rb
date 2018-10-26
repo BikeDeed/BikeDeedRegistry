@@ -51,7 +51,7 @@ module HeaderTagHelper
       'og:url'              => request.url.to_s,
       'og:image'            => page_image,
       'twitter:image'       => page_image,
-      'og:site_name'        => 'Bike Index',
+      'og:site_name'        => 'BikeDeed',
       'fb:app_id'           => '223376277803071',
       'twitter:card'        => (page_image == DEFAULT_IMAGE ? 'summary' : 'summary_large_image'),
       'twitter:creator'     => '@bikeindex',
@@ -71,7 +71,7 @@ module HeaderTagHelper
       tag(:meta, name: 'viewport', content: 'width=device-width'),
       content_tag(:title, page_title),
       tag(:meta, name: 'description', content: page_description),
-      tag(:link, rel: 'shortcut icon', href: '/fav.ico'),
+      tag(:link, rel: 'shortcut icon', href: '/favicon.png'),
       tag(:link, rel: 'apple-touch-icon-precomposed apple-touch-icon', href: '/apple_touch_icon.png'),
       csrf_meta_tags
     ]
@@ -79,7 +79,7 @@ module HeaderTagHelper
 
   def welcome_header_tags
     if action_name == 'user_home'
-      self.page_title = (current_user && current_user.name) ? "#{current_user.name} on Bike Index" : 'Your bikes'
+      self.page_title = (current_user && current_user.name) ? "#{current_user.name} on BikeDeed" : 'Your bikes'
     elsif action_name == 'choose_registration'
       self.page_title = translation_title(location: 'meta_titles.bikes_new')
       self.page_description = translation_description(location: 'meta_descriptions.bikes_new')
@@ -126,9 +126,9 @@ module HeaderTagHelper
     if action_name == 'show'
       if @user.title.present?
         self.page_title = @user.title
-        self.page_description = "#{@user.title} on Bike Index"
+        self.page_description = "#{@user.title} on BikeDeed"
       end
-      if @user.avatar && @user.avatar.url != 'https://files.bikeindex.org/blank.png'
+      if @user.avatar && @user.avatar.url != 'https://files.bikedeed.io/blank.png'
         self.page_image = @user.avatar.url
       end
     end
@@ -207,6 +207,6 @@ module HeaderTagHelper
   end
 
   def news_auto_discovery_link
-    auto_discovery_link_tag(:atom, news_index_url(format: 'atom'), title: 'Bike Index news atom feed')
+    auto_discovery_link_tag(:atom, news_index_url(format: 'atom'), title: 'BikeDeed news atom feed')
   end
 end

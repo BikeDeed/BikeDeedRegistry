@@ -8,7 +8,7 @@ describe AdminMailer do
     end
     it 'renders email' do
       expect(@mail.subject).to eq('New Feedback Submitted')
-      expect(@mail.to).to eq(['contact@bikeindex.org'])
+      expect(@mail.to).to eq(['contact@bikedeed.io'])
       expect(@mail.reply_to).to eq([@feedback.email])
     end
   end
@@ -22,26 +22,26 @@ describe AdminMailer do
       @feedback.update_attributes(feedback_type: 'bike_delete_request')
       mail = AdminMailer.feedback_notification_email(@feedback)
       expect(mail.subject).to eq('New Feedback Submitted')
-      expect(mail.to).to eq(['contact@bikeindex.org'])
+      expect(mail.to).to eq(['contact@bikedeed.io'])
       expect(mail.reply_to).to eq([@feedback.email])
     end
     it 'sends a recovery email' do
       @feedback.update_attributes(feedback_type: 'bike_recovery')
       mail = AdminMailer.feedback_notification_email(@feedback)
       expect(mail.subject).to eq('New Feedback Submitted')
-      expect(mail.to).to eq(['contact@bikeindex.org', 'bryan@bikeindex.org', 'lily@bikeindex.org'])
+      expect(mail.to).to eq(['contact@bikedeed.io', 'bryan@bikedeed.io', 'lily@bikedeed.io'])
       expect(mail.reply_to).to eq([@feedback.email])
     end
     it 'sends a stolen_information email' do
       @feedback.update_attributes(feedback_type: 'stolen_information')
       mail = AdminMailer.feedback_notification_email(@feedback)
-      expect(mail.to).to eq(['bryan@bikeindex.org'])
+      expect(mail.to).to eq(['bryan@bikedeed.io'])
     end
     it 'sends a serial update email' do
       @feedback.update_attributes(feedback_type: 'serial_update_request')
       mail = AdminMailer.feedback_notification_email(@feedback)
       expect(mail.subject).to eq('New Feedback Submitted')
-      expect(mail.to).to eq(['contact@bikeindex.org'])
+      expect(mail.to).to eq(['contact@bikedeed.io'])
       expect(mail.reply_to).to eq([@feedback.email])
     end
     it 'sends a new org email' do
@@ -64,7 +64,7 @@ describe AdminMailer do
       expect(bike.user_hidden).to be_truthy
       mail = AdminMailer.feedback_notification_email(feedback)
       expect(mail.subject).to eq('New Feedback Submitted')
-      expect(mail.to).to eq(['contact@bikeindex.org'])
+      expect(mail.to).to eq(['contact@bikedeed.io'])
       expect(mail.reply_to).to eq([feedback.email])
     end
   end
@@ -76,7 +76,7 @@ describe AdminMailer do
     end
 
     it 'renders email' do
-      expect(@mail.to).to eq(['contact@bikeindex.org'])
+      expect(@mail.to).to eq(['contact@bikedeed.io'])
       expect(@mail.subject).to match("doesn't have any admins")
     end
   end

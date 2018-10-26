@@ -11,15 +11,15 @@ class OrganizationsController < ApplicationController
 
   def connect_lightspeed
     if current_user && current_user.organizations.any?
-      redirect_to 'https://posintegration.bikeindex.org' and return
+      redirect_to 'https://posintegration.bikedeed.io' and return
     end
 
     session[:return_to] = connect_lightspeed_path
     if current_user.present?
-      flash[:info] = "You have to create an organization on Bike Index before you can connect with Lightspeed"
+      flash[:info] = "You have to create an organization on BikeDeed before you can connect with Lightspeed"
       redirect_to new_organization_path
     else
-      flash[:info] = "You have to sign up for an account on Bike Index before you can connect with Lightspeed"
+      flash[:info] = "You have to sign up for an account on BikeDeed before you can connect with Lightspeed"
       redirect_to new_user_path and return
     end
   end
@@ -85,7 +85,7 @@ class OrganizationsController < ApplicationController
   def set_bparam
     return true unless find_organization.present?
     unless find_organization.auto_user.present?
-      flash[:error] = "We're sorry, that organization doesn't have a user set up to register bikes through. Email contact@bikeindex.org if this seems like an error."
+      flash[:error] = "We're sorry, that organization doesn't have a user set up to register bikes through. Email contact@bikedeed.io if this seems like an error."
       redirect_to root_url and return
     end
     if params[:b_param_id_token].present?
@@ -118,7 +118,7 @@ class OrganizationsController < ApplicationController
   def find_organization
     @organization = Organization.friendly_find(params[:id])
     return @organization if @organization.present?
-    flash[:error] = "We're sorry, that organization isn't on Bike Index yet. Email contact@bikeindex.org if this seems like an error."
+    flash[:error] = "We're sorry, that organization isn't on BikeDeed yet. Email contact@bikedeed.io if this seems like an error."
     redirect_to root_url and return
   end
 

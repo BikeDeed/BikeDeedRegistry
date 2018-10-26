@@ -14,9 +14,9 @@ describe OrganizedMailer do
       it 'stolen renders, with reply to for the organization' do
         expect(b_param.owner_email).to be_present
         mail = OrganizedMailer.partial_registration(b_param)
-        expect(mail.subject).to eq('Finish your Bike Index registration!')
+        expect(mail.subject).to eq('Finish your BikeDeed registration!')
         expect(mail.to).to eq([b_param.owner_email])
-        expect(mail.reply_to).to eq(['contact@bikeindex.org'])
+        expect(mail.reply_to).to eq(['contact@bikedeed.io'])
       end
     end
     context 'with organization' do
@@ -28,7 +28,7 @@ describe OrganizedMailer do
           expect(header_mail_snippet).to be_present
           organization.reload
           mail = OrganizedMailer.partial_registration(b_param)
-          expect(mail.subject).to eq("Finish your #{organization.short_name} Bike Index registration!")
+          expect(mail.subject).to eq("Finish your #{organization.short_name} BikeDeed registration!")
           expect(mail.to).to eq([b_param.owner_email])
           expect(mail.reply_to).to eq([organization.auto_user.email])
           expect(mail.body.encoded).to match header_mail_snippet.body
@@ -42,7 +42,7 @@ describe OrganizedMailer do
     context 'passed new ownership' do
       let(:ownership) { FactoryGirl.create(:ownership) }
       it 'renders email' do
-        expect(mail.subject).to match 'Confirm your Bike Index registration'
+        expect(mail.subject).to match 'Confirm your BikeDeed registration'
       end
     end
     context 'existing bike and ownership passed' do
@@ -53,8 +53,8 @@ describe OrganizedMailer do
         let(:bike) { FactoryGirl.create(:bike, owner_email: 'someotheremail@stuff.com', creator_id: user.id) }
         it 'renders email' do
           expect(ownership_1).to be_present
-          expect(mail.subject).to eq('Confirm your Bike Index registration')
-          expect(mail.reply_to).to eq(['contact@bikeindex.org'])
+          expect(mail.subject).to eq('Confirm your BikeDeed registration')
+          expect(mail.reply_to).to eq(['contact@bikedeed.io'])
         end
       end
       context 'claimed registration (e.g. self_made)' do
@@ -63,8 +63,8 @@ describe OrganizedMailer do
           ownership.update_attribute :claimed, true
           ownership.reload
           expect(ownership.claimed).to be_truthy
-          expect(mail.subject).to eq('Bike Index registration successful')
-          expect(mail.reply_to).to eq(['contact@bikeindex.org'])
+          expect(mail.subject).to eq('BikeDeed registration successful')
+          expect(mail.reply_to).to eq(['contact@bikedeed.io'])
         end
       end
       context 'stolen' do
@@ -72,8 +72,8 @@ describe OrganizedMailer do
         let(:country) { FactoryGirl.create(:country) }
         let(:bike) { FactoryGirl.create(:stolen_bike, cycle_type: cycle_type) }
         it 'renders email with the stolen title' do
-          expect(mail.subject).to eq("Confirm your stolen #{cycle_type.name} on Bike Index")
-          expect(mail.reply_to).to eq(['contact@bikeindex.org'])
+          expect(mail.subject).to eq("Confirm your stolen #{cycle_type.name} on BikeDeed")
+          expect(mail.reply_to).to eq(['contact@bikedeed.io'])
           expect(mail.body.encoded).to match bike.current_stolen_record.find_or_create_recovery_link_token
         end
       end
@@ -101,7 +101,7 @@ describe OrganizedMailer do
       context 'new non-stolen bike' do
         let(:bike) { FactoryGirl.create(:organization_bike, creation_organization: organization) }
         it 'renders email and includes the snippets' do
-          expect(mail.subject).to eq("Confirm your #{organization.short_name} Bike Index registration")
+          expect(mail.subject).to eq("Confirm your #{organization.short_name} BikeDeed registration")
           expect(mail.body.encoded).to match header_mail_snippet.body
           expect(mail.body.encoded).to match welcome_mail_snippet.body
           expect(mail.body.encoded).to match security_mail_snippet.body
@@ -114,7 +114,7 @@ describe OrganizedMailer do
           expect(mail.body.encoded).to match header_mail_snippet.body
           expect(mail.body.encoded).to match welcome_mail_snippet.body
           expect(mail.body.encoded).to match security_mail_snippet.body
-          expect(mail.subject).to eq("Confirm your #{organization.short_name} stolen #{bike.type} on Bike Index")
+          expect(mail.subject).to eq("Confirm your #{organization.short_name} stolen #{bike.type} on BikeDeed")
           expect(mail.reply_to).to eq([organization.auto_user.email])
         end
       end
@@ -131,8 +131,8 @@ describe OrganizedMailer do
           expect(mail.body.encoded).to_not match header_mail_snippet.body
           expect(mail.body.encoded).to_not match welcome_mail_snippet.body
           expect(mail.body.encoded).to_not match security_mail_snippet.body
-          expect(mail.subject).to eq('Confirm your Bike Index registration')
-          expect(mail.reply_to).to eq(['contact@bikeindex.org'])
+          expect(mail.subject).to eq('Confirm your BikeDeed registration')
+          expect(mail.reply_to).to eq(['contact@bikedeed.io'])
         end
       end
     end
@@ -146,7 +146,7 @@ describe OrganizedMailer do
     end
     it 'renders email' do
       expect(mail.body.encoded).to match header_mail_snippet.body
-      expect(mail.subject).to eq("Join #{organization.short_name} on Bike Index")
+      expect(mail.subject).to eq("Join #{organization.short_name} on BikeDeed")
       expect(mail.reply_to).to eq([organization.auto_user.email])
     end
   end
