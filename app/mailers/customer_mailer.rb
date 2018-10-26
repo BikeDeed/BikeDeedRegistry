@@ -1,6 +1,6 @@
 class CustomerMailer < ActionMailer::Base
-  CONTACT_BIKEINDEX = '"Bike Index" <contact@bikeindex.org>'.freeze
-  default from: CONTACT_BIKEINDEX,
+  CONTACT_BIKEDEED= '"BikeDeed" <info@bikedeed.io>'.freeze
+  default from: CONTACT_BIKEDEED,
           content_type: 'multipart/alternative',
           parts_order: ['text/calendar', 'text/plain', 'text/html', 'text/enriched']
   layout 'email'
@@ -47,8 +47,8 @@ class CustomerMailer < ActionMailer::Base
 
   def stolen_notification_email(stolen_notification)
     @stolen_notification = stolen_notification
-    mail(to: [@stolen_notification.receiver_email, 'lily@bikeindex.org', 'bryan@bikeindex.org'],
-         from: 'bryan@bikeindex.org', subject: @stolen_notification.display_subject)
+    mail(to: [@stolen_notification.receiver_email, 'lily@bikedeed.io', 'bryan@bikedeed.io'],
+         from: 'bryan@bikedeed.io', subject: @stolen_notification.display_subject)
     dates = stolen_notification.send_dates_parsed + [Time.now.to_i]
     stolen_notification.update_attribute :send_dates, dates
   end
@@ -58,7 +58,7 @@ class CustomerMailer < ActionMailer::Base
     @bike = stolen_record.bike
     @biketype = CycleType.find(@bike.cycle_type_id).name.downcase
     mail(to: [@bike.owner_email],
-         from: 'bryan@bikeindex.org',
+         from: 'bryan@bikedeed.io',
          subject: "Your #{@biketype} has been marked recovered!")
   end
 
@@ -66,7 +66,7 @@ class CustomerMailer < ActionMailer::Base
     @user = user
     @_action_has_layout = false # layout is manually included here
     mail(to: @user.email,
-         from: '"Lily Williams" <lily@bikeindex.org>',
+         from: '"Lily Williams" <lily@bikedeed.io>',
          subject: 'Bike Index Terms and Privacy Policy Update')
   end
 end

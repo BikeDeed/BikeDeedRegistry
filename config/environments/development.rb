@@ -14,12 +14,12 @@ Rails.application.configure do
     { namespace: Bikeindex, expires_in: 0, compress: true }
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3001 }
+  config.action_mailer.default_url_options = { host: '54.202.221.223', port: 3001 }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {
     address: 'localhost',
-    port: 1025
+    port: 25
   }
 
   # Print deprecation notices to the Rails logger.

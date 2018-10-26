@@ -1,6 +1,8 @@
 class SessionsController < ApplicationController
   include Sessionable
   layout 'application_revised'
+  #HACK ALERT figure out why this is needed
+  skip_before_action :verify_authenticity_token
   before_filter :store_return_to, only: [:new]
   before_filter :skip_if_signed_in, only: [:new]
 

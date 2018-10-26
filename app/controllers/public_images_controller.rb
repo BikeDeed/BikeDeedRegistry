@@ -1,4 +1,6 @@
 class PublicImagesController < ApplicationController
+  #HACK ALERT figure out why this is needed
+  skip_before_action :verify_authenticity_token
   before_filter :find_image_if_owned, only: [:edit, :update, :destroy, :is_private]
   before_filter :ensure_authorized_to_create!, only: [:create]
 
