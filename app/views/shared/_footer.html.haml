@@ -6,15 +6,15 @@
           = link_to "Register a bike", choose_registration_url
           %ul
             %li
-              = link_to "Bike Index partner organizations", where_url
+              = link_to "BikeDeed partner organizations", where_url
             %li
-              = link_to "Bike Index resources", resources_url
+              = link_to "BikeDeed resources", resources_url
             
         %li
-          = link_to "About Bike Index", about_url  
+          = link_to "About BikeDeed", about_url  
           %ul       
             %li
-              = link_to "Bike Index news", news_index_url
+              = link_to "BikeDeed news", news_index_url
             %li
               = link_to "List of manufacturers", manufacturers_url         
            
@@ -28,13 +28,13 @@
         %li.social
           %ul
             %li
-              = link_to image_tag("facebook.svg", alt: "Bike Index Facebook"), "https://facebook.com/bikeindex"
+              = link_to image_tag("facebook.svg", alt: "BikeDeed Facebook"), "https://facebook.com/bikeindex"
             %li
-              = link_to image_tag("twitter.svg", alt: "Bike Index Twitter"), "https://twitter.com/BikeIndex"
+              = link_to image_tag("twitter.svg", alt: "BikeDeed Twitter"), "https://twitter.com/BikeIndex"
 
       %p
         %span{data: {license: "https://github.com/bikeindex/bike_index/blob/master/LICENSE"}}
-          #{Time.zone.now.year} &copy; Bike Index.
+          #{Time.zone.now.year} &copy; BikeDeed.
         - if current_user.present? && current_user.has_membership?
           #{link_to "Privacy policy", privacy_url}, #{link_to "vendor terms", vendor_terms_url}
         - else

@@ -1,8 +1,8 @@
 - cache 'documentation_v1' do
   %h1#documentation_head{ data: {production: (1 if Rails.env.production?)}}
-    Bike Index API V1
+    BikeDeed API V1
   %p
-    This is the documentation for the Bike Index JSON API v1
+    This is the documentation for the BikeDeed JSON API v1
 
   %article
     .alert
@@ -12,7 +12,7 @@
         Go to #{link_to "the current documentation", documentation_index_url}
 
   %p
-    The Bike Index API supports Cross-Origin Resource Sharing (CORS). The CORS spec allows web applications to make cross domain AJAX calls without using workarounds such as JSONP.
+    The BikeDeed API supports Cross-Origin Resource Sharing (CORS). The CORS spec allows web applications to make cross domain AJAX calls without using workarounds such as JSONP.
   %p
     For more information about CORS, read #{link_to "this blog post", "http://www.nczonline.net/blog/2010/05/25/cross-domain-ajax-with-cross-origin-resource-sharing/"}, or #{link_to "the spec", "http://www.w3.org/TR/access-control/#simple-cross-origin-request-and-actual-r"}.
 
@@ -60,7 +60,7 @@
     Bike Associations
 
   %p
-    The Bike Index makes searching for and finding bikes easier by using standardized attributes to catalog them.
+    The BikeDeed makes searching for and finding bikes easier by using standardized attributes to catalog them.
 
   %h3#wheel_sizes_ref
     Wheel Sizes
@@ -104,7 +104,7 @@
   %h2#errors
     Errors
   %p 
-    Bike Index uses conventional HTTP response codes to indicate success or failure of an API request.
+    BikeDeed uses conventional HTTP response codes to indicate success or failure of an API request.
   %p
     Codes in the 2xx range indicate success, codes in the 4xx range indicate an error that resulted from the provided information (e.g. a required parameter was missing), and codes in the 5xx range indicate an error with our servers.
     

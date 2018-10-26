@@ -1,7 +1,7 @@
 .container-fluid
   .row.donate-block
     .col-xs-12
-      %h3 Thank you for supporting Bike Index!
+      %h3 Thank you for supporting BikeDeed!
     .select-amount
       - if @payment.is_donation
         %p
@@ -9,7 +9,7 @@
         %p.padded
           XOXO,
           %br
-          Bike Index team
+          BikeDeed team
       - else
         %p
           We received your payment of $#{@payment.amount}

@@ -12,7 +12,7 @@
         %ul
           - if content_page_type == 'news'
             %li
-              = active_link 'Bike Index news', news_index_path
+              = active_link 'BikeDeed news', news_index_path
           %li
             = active_link 'About', about_path
           - unless content_page_type == 'news'
@@ -31,7 +31,7 @@
           Other pages
         %ul
           %li
-            = active_link 'Bike Index news', news_index_path
+            = active_link 'BikeDeed news', news_index_path
           %li
             = active_link 'Protect your bike', protect_your_bike_path
           - if %w(news about manufacturers).include?(content_page_type)
@@ -39,7 +39,7 @@
               = active_link 'Donate', support_the_index_path
           - if %w(news serials manufacturers).include?(content_page_type)
             %li
-              = active_link 'Bike Index Store', shop_path
+              = active_link 'BikeDeed Store', shop_path
           %li
             = active_link 'Design and developer resources', dev_and_design_path
           %li

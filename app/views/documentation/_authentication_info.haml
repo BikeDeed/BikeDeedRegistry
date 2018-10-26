@@ -1,8 +1,8 @@
 :markdown
   ## Authentication notes
-  Here are some notes on authentication with Bike Index. It's messy but maybe it will while we're in the process of incorporating this into the documentation.
+  Here are some notes on authentication with BikeDeed. It's messy but maybe it will while we're in the process of incorporating this into the documentation.
 
-  There are two supported ways of authenticating with Bike Index through OAuth2:
+  There are two supported ways of authenticating with BikeDeed through OAuth2:
 
   1. Authorization flow (also called Explicit grant flow)
 
@@ -40,7 +40,7 @@
       
       token = client.auth_code.get_token(code, :redirect_uri => 'urn:ietf:wg:oauth:2.0:oob')
       # Where "code" is the code from the page after authentication
-      # Bike Index tokens expire in 1 hour - (but that is subject to change without notice)
+      # BikeDeed tokens expire in 1 hour - (but that is subject to change without notice)
 
       token.expired?
       # => false

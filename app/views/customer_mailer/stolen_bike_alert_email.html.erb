@@ -16,7 +16,7 @@
     </a>
     <p style="margin:0;color:#333333;font-family:Georgia,'Times New Roman',serif;font-size:22px;line-height:27px;margin-bottom:0;margin-top:5px;">
       <%= @info[:tweet_string].split('https://bikeindex.org')[0] %>
-      <a href="https://bikeindex.org/bikes/<%= @bike.id %>" style="border:none;color:#0084b4;text-decoration:none">Bike Index link</a>
+      <a href="https://bikeindex.org/bikes/<%= @bike.id %>" style="border:none;color:#0084b4;text-decoration:none">BikeDeed link</a>
     </p>
     <a href="https://twitter.com/<%= @info[:tweet_account_screen_name] %>/status/<%= @info[:tweet_id] %>" style="display:block;border:none;color:#0084b4;text-decoration:none;color:#999999;font-size: 12px; margin-top: 5px;" target="_blank"><%= Time.now.strftime("%I:%M %P - %d %b %y") %></a>
   </div>
@@ -36,7 +36,7 @@
     <span class="text" style="display: block;text-align: center;margin-top: .5em;line-height: 1.2em;padding: 1em 1em 0;">Share on Facebook - so everyone knows to watch out for your <%= @bike.type %>!</span>
   </a>
 </div>
-<p style="margin: 50px 0 0; padding: 20px 0 0; font-weight: 400; color: #95A5A5; text-align: center;">This email is about the <%= stolen_word %> <%= @biketype %> registered on Bike Index on <%= @bike.created_at.strftime("%m.%d.%y") %></p>
+<p style="margin: 50px 0 0; padding: 20px 0 0; font-weight: 400; color: #95A5A5; text-align: center;">This email is about the <%= stolen_word %> <%= @biketype %> registered on BikeDeed on <%= @bike.created_at.strftime("%m.%d.%y") %></p>
 
 <%= render partial: '/shared/email_bike_box', locals: { bike_url: bike_url(@bike) } %>
 

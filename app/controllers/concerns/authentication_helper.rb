@@ -3,14 +3,14 @@ module AuthenticationHelper
   def authenticate_user(msg = 'Sorry, you have to log in', flash_type: :error)
     if current_user.present?
       unless current_user.terms_of_service
-        redirect_to accept_terms_url(subdomain: false) and return
+        redirect_to accept_terms_url(subdomain: true) and return
       end
     else
       flash[flash_type] = msg
       if msg.match(/create an account/i).present?
-        redirect_to new_user_url(subdomain: false) and return
+        redirect_to new_user_url(subdomain: true) and return
       else
-        redirect_to new_session_url(subdomain: false) and return
+        redirect_to new_session_url(subdomain: true) and return
       end
     end
   end
@@ -22,7 +22,7 @@ module AuthenticationHelper
     elsif current_user.is_content_admin
       admin_news_index_url
     else
-      user_home_url(subdomain: false)
+      user_home_url(subdomain: true)
     end
   end
 
@@ -49,7 +49,7 @@ module AuthenticationHelper
   def require_member!
     return true if current_user.is_member_of?(current_organization)
     flash[:error] = "You're not a member of that organization!"
-    redirect_to user_home_url(subdomain: false) and return
+    redirect_to user_home_url(subdomain: true) and return
   end
 
   def require_admin!

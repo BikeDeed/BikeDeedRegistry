@@ -6,7 +6,7 @@
     .col-xs-12
       %h3
         - if @is_payment
-          Pay Bike Index
+          Pay BikeDeed
         - else
           Donate today
     .select-amount
@@ -34,7 +34,7 @@
           = submit_tag 'next  >', class: 'btn btn-primary'
 
       %p.nfp-info
-        Bike Index is a #{ link_to '501(c)(3) nonprofit', 'https://bikeindex.org/news/bike-index--now-a-nonprofit' }.
+        BikeDeed is a #{ link_to '501(c)(3) nonprofit', 'https://bikeindex.org/news/bike-index--now-a-nonprofit' }.
 
   <script src="https://checkout.stripe.com/checkout.js"></script>
   - payment_type = @is_payment ? 'Pay' : 'Donate'

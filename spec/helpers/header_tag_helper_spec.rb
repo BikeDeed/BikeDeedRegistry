@@ -49,7 +49,7 @@ describe HeaderTagHelper do
       let(:controller_name) { 'users' }
       let(:action_name) { 'new' }
       it 'returns the translation title' do
-        expect(helper.auto_title).to eq 'Sign up - Bike Index'
+        expect(helper.auto_title).to eq 'Sign up - BikeDeed'
       end
     end
     context 'rendering from controller and action name' do
@@ -122,7 +122,7 @@ describe HeaderTagHelper do
     context 'existing meta description translation' do
       let(:controller_name) { 'manufacturers' }
       let(:action_name) { 'index' }
-      let(:target) { 'Bicycle related manufacturers listed on Bike Index - all the brands you know and then some.' }
+      let(:target) { 'Bicycle related manufacturers listed on BikeDeed - all the brands you know and then some.' }
       it 'returns the translation' do
         expect(helper.auto_description).to eq target
       end
@@ -130,7 +130,7 @@ describe HeaderTagHelper do
     context 'no translation present' do
       let(:controller_name) { 'weird_things' }
       let(:action_name) { 'index' }
-      let(:target) { 'The best bike registry: Simple, secure and free.' }
+      let(:target) { 'Blockchain Protected.' }
       it 'returns the default title' do
         expect(helper.auto_description).to eq target
       end
@@ -212,7 +212,7 @@ describe HeaderTagHelper do
         allow(view).to receive(:current_organization) { organization }
         helper.landing_pages_header_tags
         expect(helper.page_title).to eq 'Sweet University Bike Registration'
-        expect(helper.page_description).to eq 'Register your bicycle with Sweet University - powered by Bike Index'
+        expect(helper.page_description).to eq 'Register your bicycle with Sweet University - powered by BikeDeed'
       end
     end
   end
@@ -232,7 +232,7 @@ describe HeaderTagHelper do
         it 'sets the page title' do
           allow(view).to receive(:current_user) { user }
           helper.welcome_header_tags
-          expect(helper.page_title).to eq 'John on Bike Index'
+          expect(helper.page_title).to eq 'John on BikeDeed'
         end
       end
     end
@@ -241,7 +241,7 @@ describe HeaderTagHelper do
       it 'sets the page title' do
         helper.welcome_header_tags
         expect(helper.page_title).to eq 'Register a bike!'
-        expect(helper.page_description).to eq 'Register a bike on Bike Index quickly, easily and for free. Create a permanent verified record of your bike to protect it.'
+        expect(helper.page_description).to eq 'Register a bike on BikeDeed quickly, easily and for free. Create a permanent verified record of your bike to protect it.'
       end
     end
   end
@@ -258,14 +258,14 @@ describe HeaderTagHelper do
         @user = user
         helper.users_header_tags
         expect(helper.page_title).to eq "John's bikes"
-        expect(helper.page_description).to eq "John's bikes on Bike Index"
+        expect(helper.page_description).to eq "John's bikes on BikeDeed"
         expect(helper.page_image).to eq 'http://something.com'
       end
     end
     context 'with no user title and blank avatar' do
       let(:user) { FactoryGirl.build(:user, name: 'John') }
       it 'has default image and a title' do
-        allow(avatar).to receive(:url) { 'https://files.bikeindex.org/blank.png' }
+        allow(avatar).to receive(:url) { 'https://files.bikedeed.io/blank.png' }
         allow(user).to receive(:avatar) { avatar }
         @user = user
         helper.users_header_tags
@@ -328,7 +328,7 @@ describe HeaderTagHelper do
 
   describe 'news_header_tags' do
     let(:controller_name) { 'news' }
-    let(:auto_discovery_tag) { '<link rel="alternate" type="application/atom+xml" title="Bike Index news atom feed" href="http://test.host/news.atom" />' }
+    let(:auto_discovery_tag) { '<link rel="alternate" type="application/atom+xml" title="BikeDeed news atom feed" href="http://test.host/news.atom" />' }
     describe 'index' do
       let(:action_name) { 'index' }
       it 'adds auto_discovery_link' do
@@ -343,7 +343,7 @@ describe HeaderTagHelper do
       let(:blog) do
         FactoryGirl.build(:blog,
                           title: 'Cool blog',
-                          description_abbr: 'Bike Index did something cool',
+                          description_abbr: 'BikeDeed did something cool',
                           published_at: target_time,
                           updated_at: target_time,
                           user: user)
@@ -356,7 +356,7 @@ describe HeaderTagHelper do
           @blog = blog
           header_tags = helper.news_header_tags
           expect(helper.page_title).to eq 'Cool blog'
-          expect(helper.page_description).to eq 'Bike Index did something cool'
+          expect(helper.page_description).to eq 'BikeDeed did something cool'
           expect(helper.page_image).to eq 'http://something.com'
           expect(header_tags.select { |t| t && t.include?('og:type') }.first).to match 'article'
           expect(header_tags.select { |t| t && t.include?('twitter:creator') }.first).to match '@stolenbikereg'

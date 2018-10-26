@@ -7,6 +7,8 @@ Rails.application.configure do
   # Do not eager load code on boot.
   config.eager_load = false
 
+  config.force_ssl = false 
+
   # Show full error reports and disable caching.
   config.consider_all_requests_local       = true
   config.action_controller.perform_caching = false
@@ -14,7 +16,8 @@ Rails.application.configure do
     { namespace: Bikeindex, expires_in: 0, compress: true }
 
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { host: '54.202.221.223', port: 3001 }
+  #config.action_mailer.default_url_options = { host: 'staging.bikedeed.io', port: 3001 }
+  config.action_mailer.default_url_options = { protocol: 'https', host: 'staging.bikedeed.io' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.smtp_settings = {

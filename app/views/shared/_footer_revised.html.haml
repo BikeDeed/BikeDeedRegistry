@@ -4,7 +4,7 @@
       .row
         %nav.col-md-3.pull-right
           %h4
-            = active_link 'Donate to Bike Index', support_the_index_path
+            = active_link 'Donate to BikeDeed', support_the_index_path
           %ul
             %li
               = active_link 'Store', shop_path
@@ -27,7 +27,7 @@
         %nav.col-md-3.social-nav
           %ul
             %li
-              %a.footer-facebook{ href: 'https://facebook.com/bikeindex', alt: 'Bike Index Facebook' }
+              %a.footer-facebook{ href: 'https://facebook.com/bikeindex', alt: 'BikeDeed Facebook' }
                 :plain
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.09 40.09">
                     <g>
@@ -37,7 +37,7 @@
                   </svg>
 
             %li
-              %a{ href: 'https://twitter.com/BikeIndex', alt: 'Bike Index Twitter' }
+              %a{ href: 'https://twitter.com/BikeIndex', alt: 'BikeDeed Twitter' }
                 :plain
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.09 40.09">
                     <g>
@@ -46,7 +46,7 @@
                     </g>
                   </svg>
             %li
-              %a{ href:  'https://instagram.com/bikeindex', alt: 'Bike Index Instagram' }
+              %a{ href:  'https://instagram.com/bikeindex', alt: 'BikeDeed Instagram' }
                 :plain
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40.09 40.09">
                     <g>
@@ -61,7 +61,7 @@
     .container
       %p
         %span{data: {license: "https://github.com/bikeindex/bike_index/blob/master/LICENSE"}}
-          #{Time.zone.now.year} &copy; Bike Index, a 501(c)(3) nonprofit.
+          #{Time.zone.now.year} &copy; BikeDeed, a 501(c)(3) nonprofit.
         - if current_user.present? && current_user.has_membership?
           #{link_to "Privacy policy", privacy_path}, #{link_to "vendor terms", vendor_terms_path}
         - else

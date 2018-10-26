@@ -3,12 +3,12 @@
   %head
     %meta{ content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type' }
     %title
-      = content_for?(:title) ? yield(:title) : 'Bike Index'
+      = content_for?(:title) ? yield(:title) : 'BikeDeed'
     = stylesheet_link_tag 'email'
   %body
     .binx-wrapper
       .binx-header
-        %img{ src: 'https://files.bikeindex.org/email_assets/logo.png', height: '70', alt: 'Bike Index logo' }
+        %img{ src: 'https://files.bikeindex.org/email_assets/logo.png', height: '70', alt: 'BikeDeed logo' }
       .binx-body
         - if @organization.present? && controller_path == 'organized_mailer' && @organization.mail_snippet_body('header').present?
           = @organization.mail_snippet_body('header').html_safe
@@ -22,10 +22,10 @@
           %span &#9829;
           %span &#9829;
           %span &#9829;
-        %h4 The Bike Index Team
+        %h4 The BikeDeed Team
 
       .binx-footer
         %h5
-          #{Time.zone.now.year} &copy; Bike Index.
+          #{Time.zone.now.year} &copy; BikeDeed.
           - unless @organization.present? && controller_path == 'organized_mailer' && @organization.is_paid
-            Bike Index. Help prevent bike theft, #{ link_to 'make a donation.', support_the_index_url }
+            BikeDeed. Help prevent bike theft, #{ link_to 'make a donation.', support_the_index_url }

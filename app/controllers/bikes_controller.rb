@@ -9,7 +9,7 @@ class BikesController < ApplicationController
   before_filter :ensure_user_allowed_to_edit, only: [:edit, :update, :pdf]
   before_filter :render_ad, only: [:index, :show]
   before_filter :store_return_to, only: [:edit]
-  before_filter :remove_subdomain, only: [:index]
+  #before_filter :remove_subdomain, only: [:index]
   layout 'application_revised'
 
   def index
