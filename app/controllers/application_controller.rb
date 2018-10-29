@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
 
   # change this to http if not running a webserver in front of rails
   def default_url_options
-    { :protocol => "https" }
+    #{ :protocol => "https" }
+    { :protocol => "http" }
   end
 
   def forwarded_ip_address

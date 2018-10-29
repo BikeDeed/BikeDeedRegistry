@@ -1,16 +1,16 @@
-development:
-  adapter: postgresql
-  database: bikedeedstaging
-  pool: 20
-  username: bikedeeddb
-  password: 48nsMetmFZv[a*
-  host: bikedeeddb.cvsbcitmsa2n.us-west-2.rds.amazonaws.com
-  port: 5432
-
 #development:
 #  adapter: postgresql
-#  database: bikeindex_development
+#  database: bikedeedstaging
 #  pool: 20
+#  username: bikedeeddb
+#  password: 48nsMetmFZv[a*
+#  host: bikedeeddb.cvsbcitmsa2n.us-west-2.rds.amazonaws.com
+#  port: 5432
+
+development:
+  adapter: postgresql
+  database: bikedeed
+  pool: 20
 
 
 # Warning: The database defined as "test" will be erased and
