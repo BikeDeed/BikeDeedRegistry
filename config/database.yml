@@ -1,3 +1,23 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: db
+  port: 5432
+  username: postgres
+  password: postgres
+ 
+development:
+  <<: *default
+  database: bikedeed 
+ 
+test:
+  <<: *default
+  database: bikedeed
+ 
+production:
+  <<: *default
+  database: bikedeed 
+
 #development:
 #  adapter: postgresql
 #  database: bikedeedstaging
@@ -7,10 +27,10 @@
 #  host: bikedeeddb.cvsbcitmsa2n.us-west-2.rds.amazonaws.com
 #  port: 5432
 
-development:
-  adapter: postgresql
-  database: bikedeed
-  pool: 20
+#development:
+#  adapter: postgresql
+#  database: bikedeed
+#  pool: 20
 
 
 # Warning: The database defined as "test" will be erased and
@@ -20,16 +40,16 @@ development:
 #  adapter: postgresql
 #  database: bikeindex_test
 
-staging:
-  adapter: postgresql
-  database: bikedeed
-  pool: 20
-  username: bikedeeddb
-  password: 48nsMetmFZv[a*
-  host: bikedeeddb.cvsbcitmsa2n.us-west-2.rds.amazonaws.com
-  port: 5432
+#staging:
+#  adapter: postgresql
+#  database: bikedeed
+#  pool: 20
+#  username: bikedeeddb
+#  password: 48nsMetmFZv[a*
+#  host: bikedeeddb.cvsbcitmsa2n.us-west-2.rds.amazonaws.com
+#  port: 5432
 
-production:
-  adapter: postgresql
-  database: bikeindex
-  pool: 35
+#production:
+#  adapter: postgresql
+#  database: bikeindex
+#  pool: 35
