@@ -1,0 +1,23 @@
+app:
+
+  dockerfile: Dockerfile-production
+
+  # use the Dockerfile next to this file
+  build: .
+
+  # rely on the RAILS_ENV value of the host machine
+  environment:
+    RAILS_ENV: $RAILS_ENV
+
+  # expose the port we configured Unicorn to bind to
+  ports:
+    - "3001:3001"
+
+  # this is the host working directory
+  volumes: 
+    - .:/var/www/bikedeedregistry
+
+
+# 1. docker exec -it bikedeedregistry_app_1 /bin/bash
+# 2. rake db:setup
+# 3. rake seed_test_users_and_bikes

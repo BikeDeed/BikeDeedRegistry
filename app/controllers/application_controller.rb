@@ -10,10 +10,15 @@ class ApplicationController < ActionController::Base
     x_download_options: false,
     x_permitted_cross_domain_policies: false)
 
-  # change this to http if not running a webserver in front of rails
+  # http if not running a webserver in front of rails
   def default_url_options
-    #{ :protocol => "https" }
-    { :protocol => "http" }
+    if Rails.env.test?
+      { :protocol => "http" }
+    elsif Rails.env.development?
+      { :protocol => "http" }
+    else
+      { :protocol => "https" }
+    end
   end
 
   def forwarded_ip_address

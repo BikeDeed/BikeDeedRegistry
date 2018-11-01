@@ -1,14 +1,9 @@
-#redis:
-#    image: redis
-#    container_name: redis
-
 app:
+
+  dockerfile: Dockerfile-development
 
   # use the Dockerfile next to this file
   build: .
-
-  # sources environment variable configuration for our app
-  env_file: .env
 
   # rely on the RAILS_ENV value of the host machine
   environment:
@@ -16,7 +11,6 @@ app:
 
   # makes the app container aware of the DB container
   links:
-  # - redis
     - db
 
   # expose the port we configured Unicorn to bind to

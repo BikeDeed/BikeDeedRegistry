@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
  
+cp .env_development .env
 touch log/development.log
 > log/development.log # Clear out development log, otherwise it balloons
 > log/test.log # Clear out test log too

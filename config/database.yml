@@ -8,15 +8,15 @@ default: &default
  
 development:
   <<: *default
-  database: bikedeed 
+  database: bikedeed-development
  
 test:
   <<: *default
-  database: bikedeed
+  database: bikedeed-testing
  
-production:
-  <<: *default
-  database: bikedeed 
+#production:
+#  <<: *default
+#  database: bikedeed 
 
 #development:
 #  adapter: postgresql
@@ -40,14 +40,23 @@ production:
 #  adapter: postgresql
 #  database: bikeindex_test
 
-#staging:
-#  adapter: postgresql
-#  database: bikedeed
-#  pool: 20
-#  username: bikedeeddb
-#  password: 48nsMetmFZv[a*
-#  host: bikedeeddb.cvsbcitmsa2n.us-west-2.rds.amazonaws.com
-#  port: 5432
+staging:
+  adapter: postgresql
+  database: bikedeed-staging
+  pool: 20
+  username: bikedeeddb
+  password: 48nsMetmFZv[a*
+  host: bikedeeddb.cvsbcitmsa2n.us-west-2.rds.amazonaws.com
+  port: 5432
+
+production:
+  adapter: postgresql
+  database: bikedeed-production
+  pool: 20
+  username: bikedeeddb
+  password: 48nsMetmFZv[a*
+  host: bikedeeddb.cvsbcitmsa2n.us-west-2.rds.amazonaws.com
+  port: 5432
 
 #production:
 #  adapter: postgresql
